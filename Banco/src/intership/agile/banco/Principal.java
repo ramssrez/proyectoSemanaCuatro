@@ -17,14 +17,14 @@ public class Principal {
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
             String username, password;
-            System.out.println("Login...");
+            System.out.println("Inicio de sesión...");
 
             boolean isLoggedIn = false;
             byte tryCount = 0;
             do {
-                System.out.print("username: ");
+                System.out.print("Usuario: ");
                 username = System.console().readLine();
-                System.out.print("password: ");
+                System.out.print("Contraseña: ");
                 // Se usa System.console() para tener la habilidad de ocultar el password.
                 // El uso de System.console() puede tener resultados impredecibles en la terminal del IDE
                 // Se recomienda ejecutar la aplicación desde una terminal real.
@@ -33,19 +33,19 @@ public class Principal {
                         Objects.equals(password, PropertyHandler.getStringProperty(PROP_PASSWORD)))
                     isLoggedIn = true;
                 else
-                    System.err.println("Incorrect username or password\n\n");
+                    System.err.println("Usuario y contraseña incorrectos\n\n");
                 tryCount++;
             } while (!isLoggedIn && tryCount < TRY_LIMIT);
 
             if(isLoggedIn) {
-                System.out.printf("Successfully logged in as %s%n", username);
+                System.out.printf("Bienvenido %s%n", username);
                 runCommandListener();
             }
-            else
-                System.err.println("You have reached your attempts limit");
-
+            else{
+                System.err.println("Haz rebasado el límite para iniciar sesión, intentalo mas tarde");
+            }
             PropertyHandler.persist();
-            System.out.println("PROGRAM END");
+            System.out.println("Programa finalizado");
         } catch (IOException e) {
             //e.printStackTrace();
             System.err.printf("%s: %s%n", e.getClass().getName(), e.getMessage());
@@ -84,11 +84,12 @@ public class Principal {
                     //System.exit(0);
                     break;
                 default:
-                    System.err.printf("\"%s\" is not a recognized command%n", command);
+                    System.err.printf("\"%s\" No es un comando%n", command);
             }
         } while(!"exit".equalsIgnoreCase(command));
     }
     private static void printHelp() {
+        System.out.println("Lista de comandos disponibles ");
         System.out.println("- ayuda\n" +
                 "- chg-pass\n" +
                 "- print-path\n" +
