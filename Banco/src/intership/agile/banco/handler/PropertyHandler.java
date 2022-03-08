@@ -12,7 +12,6 @@ public class PropertyHandler {
     public static void load(String defaultPropsFile, String configPropsFile) throws FileNotFoundException, IOException {
         // Load default properties
         Properties defaultProps = new Properties(System.getProperties());
-        System.err.println(" sdfasf " + System.getProperties());
         //FileInputStream in = new FileInputStream(defaultPropsFile);
         InputStream in = PropertyHandler.class.getResourceAsStream(defaultPropsFile);
         defaultProps.load(in);

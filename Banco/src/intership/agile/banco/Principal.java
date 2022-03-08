@@ -9,11 +9,13 @@ public class Principal {
     // Buena práctica de programación: Almacenar nombres de llaves en constantes estáticas
     private static final String PROP_USERNAME = "internship.agile.banco.username";
     private static final String PROP_PASSWORD = "internship.agile.banco.password";
+    private static final String DEFAULT_PROPERTIES = "/application-default.properties";
+    private static final String APPLICATIONS_PROPERTIES = "application.properties";
     private static final byte TRY_LIMIT = 3;
 
     public static void main(String[] args) {
         try {
-            PropertyHandler.load("/application-default.properties", "application.properties");
+            PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
             String username, password;
             System.out.println("Login...");
 
@@ -37,8 +39,7 @@ public class Principal {
 
             if(isLoggedIn) {
                 System.out.printf("Successfully logged in as %s%n", username);
-                //runCommandListener();
-
+                runCommandListener();
             }
             else
                 System.err.println("You have reached your attempts limit");
@@ -49,7 +50,52 @@ public class Principal {
             //e.printStackTrace();
             System.err.printf("%s: %s%n", e.getClass().getName(), e.getMessage());
         }
-
-
+    }
+    private static void runCommandListener() {
+        String command;
+        do {
+            System.out.print("$ ");
+            command = System.console().readLine();
+            // Buena práctica de programación: Encapsular la lógica de cada case en un una función separada
+            switch (command) {
+                case "ayuda":
+                    printHelp();
+                    break;
+                case "chg-pass":
+                    //changePassword();
+                    break;
+                case "print-path":
+                    //printPath();
+                    break;
+                case "print-java-home":
+                    //printJavaHome();
+                    break;
+                case "sys-username":
+                    //printSystemUsername();
+                    break;
+                case "divide-double":
+                    //divisionDouble();
+                    break;
+                case "divide-integer":
+                    //divisionEntera();
+                    break;
+                case "exit":
+                    // No recomendado: En la mayoría de los casos, no se recomienda invocar a System.exit(int)
+                    //System.exit(0);
+                    break;
+                default:
+                    System.err.printf("\"%s\" is not a recognized command%n", command);
+            }
+        } while(!"exit".equalsIgnoreCase(command));
+    }
+    private static void printHelp() {
+        System.out.println("- ayuda\n" +
+                "- chg-pass\n" +
+                "- print-path\n" +
+                "- print-java-home\n" +
+                "- sys-username\n" +
+                "- divide-double\n" +
+                "- divide-integer\n" +
+                "- exit");
     }
 }
