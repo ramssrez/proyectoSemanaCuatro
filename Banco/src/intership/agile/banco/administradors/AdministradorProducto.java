@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class AdministradorProducto {
     private Configuracion conf;
-    private Map<String, List<ProductoFinanciero>> mapaProductos = new HashMap<>();
+    private Map<Integer, List<ProductoFinanciero>> mapaProductos = new HashMap<>();
 
     public AdministradorProducto(Configuracion conf) {
         this.conf = conf;
@@ -24,13 +24,13 @@ public class AdministradorProducto {
         List<ProductoFinanciero> productos = mapaProductos.get(cliente.getNumCliente());
         if(productos == null) {
             productos = new ArrayList<>();
-            mapaProductos.put(cliente.getNumCliente(), productos);
+            mapaProductos.put(cliente.getIdCliente(), productos);
         }
         if(producto instanceof TarjetaCredito) {
             double ingresoMensual = cliente.getIngresoMensual();
             double lineaCredito = ((TarjetaCredito) producto).getLineaCredito();
             if(lineaCredito > ingresoMensual * conf.getMaxLineaCreditoPorIngresoMensual()) {
-                System.out.println("Linea de credito excesiva para este cliente");
+                System.out.println("Linea de crédito excesiva para este cliente");
                 return;
             }
         }

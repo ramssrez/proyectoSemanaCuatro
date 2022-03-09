@@ -1,6 +1,8 @@
 package intership.agile.banco;
 
 import intership.agile.banco.administradors.AdministradorCliente;
+import intership.agile.banco.administradors.AdministradorProducto;
+import intership.agile.banco.classhelp.Configuracion;
 import intership.agile.banco.classhelp.Validacion;
 import intership.agile.banco.handler.PropertyHandler;
 import intership.agile.banco.model.Cliente;
@@ -19,9 +21,14 @@ public class Principal {
     private static final byte TRY_LIMIT = 3;
     private static List<Cliente> clientes = new ArrayList<>();
     private static AdministradorCliente administradorCliente = new AdministradorCliente();
+    private static AdministradorProducto administradorProducto;
 
     public static void main(String[] args) {
         clientes = administradorCliente.listaClientes();
+        //Configuracion configuracion = new Configuracion();
+        //configuracion.setMaxLineaCreditoPorIngresoMensual(4.0);
+        //administradorProducto = new AdministradorProducto(configuracion);
+        //administradorProducto.
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
             String username, password;
@@ -99,11 +106,11 @@ public class Principal {
     }
     private static void printHelp() {
         System.out.println("Lista de comandos disponibles ");
-        System.out.println("- ayuda\n" +
-                "- crear-cliente\n" +
-                "- lista-clientes\n" +
-                "- buscar-cliente\n" +
-                "- sys-username\n" +
+        System.out.println("- ayuda: Muestra los comandos disponibles en la aplicación\n" +
+                "- crear-cliente: Crea un nuevo cliente.\n" +
+                "- lista-clientes: Muestra los clientes con los que se cuenta.\n" +
+                "- buscar-cliente: Busca a los usuarios con el id del cliente.\n" +
+                "- producto-cliente: Crea un producto financiero del cliente\n" +
                 "- divide-double\n" +
                 "- divide-integer\n" +
                 "- exit");
