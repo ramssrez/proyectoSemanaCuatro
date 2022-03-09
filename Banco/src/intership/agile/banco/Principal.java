@@ -3,6 +3,8 @@ package intership.agile.banco;
 import intership.agile.banco.handler.PropertyHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Principal {
@@ -12,6 +14,8 @@ public class Principal {
     private static final String DEFAULT_PROPERTIES = "/application-default.properties";
     private static final String APPLICATIONS_PROPERTIES = "application.properties";
     private static final byte TRY_LIMIT = 3;
+    private static List<Cliente> clientes = new ArrayList<>();
+    private  static AdministradorCliente administradorCliente = new AdministradorCliente();
 
     public static void main(String[] args) {
         try {
@@ -64,8 +68,9 @@ public class Principal {
                 case "crear-cliente":
                     crearCliente();
                     break;
-                case "print-path":
+                case "lista-cliente":
                     //printPath();
+                    listaCliente();
                     break;
                 case "print-java-home":
                     //printJavaHome();
@@ -92,7 +97,7 @@ public class Principal {
         System.out.println("Lista de comandos disponibles ");
         System.out.println("- ayuda\n" +
                 "- crear-cliente\n" +
-                "- print-path\n" +
+                "- lista-cliente\n" +
                 "- print-java-home\n" +
                 "- sys-username\n" +
                 "- divide-double\n" +
@@ -102,12 +107,20 @@ public class Principal {
     private static void crearCliente(){
         Cliente cliente = new Cliente();
         cliente.setNombre(validarString("Nombre Cliente: "));
-        cliente.setIngresoMensual(validarDouble("Ingresa el sueldo mensual"));
-        //System.out.print("Ingresa el nombre del cliente: ");
-        //cliente.setNombre(System.console().readLine());
-        //System.out.print("Ingresa el sueldo mensual del cliente: ");
-        //cliente.setIngresoMensual(Double.parseDouble(System.console().readLine()));
-        //System.out.println(cliente.toString());
+        cliente.setIngresoMensual(validarDouble("Ingresa el sueldo mensual: "));
+        agregarCliente(cliente);
+    }
+    private static void listaCliente(){
+        if (clientes != null){
+            clientes = administradorCliente.listaClientes();
+            System.out.println(clientes);
+        }else{
+            System.out.println("No se cuenta con registro de clientes");
+        }
+
+    }
+    private static void agregarCliente(Cliente cliente){
+        administradorCliente.agregarCliente(cliente);
     }
     private static double validarDouble(String argumento){
         double valor  = 0.0;
