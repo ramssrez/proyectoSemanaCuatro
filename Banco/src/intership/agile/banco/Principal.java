@@ -1,6 +1,9 @@
 package intership.agile.banco;
 
+import intership.agile.banco.administradors.AdministradorCliente;
+import intership.agile.banco.classhelp.Validacion;
 import intership.agile.banco.handler.PropertyHandler;
+import intership.agile.banco.model.Cliente;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -137,62 +140,4 @@ public class Principal {
     private static void agregarCliente(Cliente cliente){
         administradorCliente.agregarCliente(cliente);
     }
-    /*
-    private static double validarDouble(String argumento){
-        double valor  = 0.0;
-        boolean bandera = false;
-        while (!bandera){
-            try {
-                System.out.print(argumento);
-                valor = Double.parseDouble(System.console().readLine());
-                bandera = true;
-            }catch (Exception e){
-                System.out.println("Valor incorrecto, se espera un double");
-            }
-        }
-        return valor;
-    }
-    private static int validarEntero(String argumento){
-        int valor  = 0;
-        boolean bandera = false;
-        while (!bandera){
-            try {
-                System.out.print(argumento);
-                valor = Integer.parseInt(System.console().readLine());
-                bandera = true;
-            }catch (Exception e){
-                System.out.println("Valor incorrecto, se espera un entero");
-            }
-        }
-        return valor;
-    }
-    private static String validarString(String argumento){
-        boolean bandera = false;
-        String string = "";
-        while (!bandera){
-            try {
-                System.out.print(argumento);
-                string = System.console().readLine();
-                if (!soloLetras(string) || string.isEmpty()){
-                    System.err.println("Nombre incorrecto, intenta de nuevo");
-                }else {
-                    bandera = true;
-                }
-            }catch (Exception e){
-                System.out.println("Valor incorrecto, se espera un string");
-            }
-        }
-        return string;
-    }
-    public static boolean soloLetras(String cadena) {
-        for (int x = 0; x < cadena.length(); x++) {
-            char c = cadena.charAt(x);
-            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-     */
 }

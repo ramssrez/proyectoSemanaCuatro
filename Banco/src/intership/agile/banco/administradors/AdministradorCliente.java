@@ -1,4 +1,6 @@
-package intership.agile.banco;
+package intership.agile.banco.administradors;
+
+import intership.agile.banco.model.Cliente;
 
 import java.util.ArrayList;
 import java.util.List;

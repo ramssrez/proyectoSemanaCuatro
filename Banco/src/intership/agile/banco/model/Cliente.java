@@ -1,4 +1,4 @@
-package intership.agile.banco;
+package intership.agile.banco.model;
 
 public class Cliente {
     private String nombre;
