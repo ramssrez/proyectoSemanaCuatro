@@ -107,7 +107,7 @@ public class Principal {
     }
 
     private static void buscarCliente(){
-        int entero = validarEntero("Ingresa el id del cliente: ");
+        int entero = Validacion.validarEntero("Ingresa el id del cliente: ");
         Cliente cliente = administradorCliente.getCliente(entero,clientes);
         if (cliente != null){
             System.out.println(cliente.toString());
@@ -117,8 +117,8 @@ public class Principal {
     }
     private static void crearCliente(){
         Cliente cliente = new Cliente();
-        cliente.setNombre(validarString("Nombre Cliente: "));
-        cliente.setIngresoMensual(validarDouble("Ingresa el sueldo mensual: "));
+        cliente.setNombre(Validacion.validarString("Ingresa el nombre: "));
+        cliente.setIngresoMensual(Validacion.validarDouble("Ingresa el sueldo mensual: "));
         agregarCliente(cliente);
     }
     private static void listaClientes(){
@@ -129,6 +129,7 @@ public class Principal {
         }
     }
     public static void impresionCliente(){
+        System.out.println("ID : Nombre"  );
         for (Cliente cliente : clientes){
             System.out.println(cliente.getIdCliente() + " : " + cliente.getNombre());
         }
@@ -136,6 +137,7 @@ public class Principal {
     private static void agregarCliente(Cliente cliente){
         administradorCliente.agregarCliente(cliente);
     }
+    /*
     private static double validarDouble(String argumento){
         double valor  = 0.0;
         boolean bandera = false;
@@ -191,4 +193,6 @@ public class Principal {
         }
         return true;
     }
+
+     */
 }

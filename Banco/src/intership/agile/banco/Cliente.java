@@ -11,6 +11,11 @@ public class Cliente {
         idCliente = ++Cliente.contador;
     }
 
+    public Cliente(String nombre, double ingresoMensual) {
+        this.nombre = nombre;
+        this.ingresoMensual = ingresoMensual;
+    }
+
     public Cliente(String nombre, String numCliente, double ingresoMensual) {
         this.nombre = nombre;
         this.numCliente = numCliente;
