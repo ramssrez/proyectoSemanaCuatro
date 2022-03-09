@@ -61,8 +61,8 @@ public class Principal {
                 case "ayuda":
                     printHelp();
                     break;
-                case "chg-pass":
-                    //changePassword();
+                case "crear-cliente":
+                    crearCliente();
                     break;
                 case "print-path":
                     //printPath();
@@ -91,12 +91,51 @@ public class Principal {
     private static void printHelp() {
         System.out.println("Lista de comandos disponibles ");
         System.out.println("- ayuda\n" +
-                "- chg-pass\n" +
+                "- crear-cliente\n" +
                 "- print-path\n" +
                 "- print-java-home\n" +
                 "- sys-username\n" +
                 "- divide-double\n" +
                 "- divide-integer\n" +
                 "- exit");
+    }
+    private static void crearCliente(){
+        Cliente cliente = new Cliente();
+        cliente.setNombre(validarString("Nombre Cliente: "));
+        //System.out.print("Ingresa el nombre del cliente: ");
+        //cliente.setNombre(System.console().readLine());
+        //System.out.print("Ingresa el sueldo mensual del cliente: ");
+        //cliente.setIngresoMensual(Double.parseDouble(System.console().readLine()));
+        //System.out.println(cliente.toString());
+    }
+    private static String validarString(String argumento){
+        boolean bandera = false;
+        String s = "";
+
+        while (!bandera){
+            try {
+                System.out.print(argumento);
+                s = System.console().readLine();
+                if (!contieneSoloLetras(s)){
+                    System.err.println("Nombre incorrecto, intenta de nuevo");
+                }else {
+                    bandera = true;
+                }
+            }catch (Exception e){
+                System.out.println("Valor incorrecto, se espera un string");
+            }
+        }
+        return s;
+    }
+
+    public static boolean contieneSoloLetras(String cadena) {
+        System.out.println("Si entra al metodo");
+        for (int x = 0; x < cadena.length(); x++) {
+            char c = cadena.charAt(x);
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
+                return false;
+            }
+        }
+        return true;
     }
 }

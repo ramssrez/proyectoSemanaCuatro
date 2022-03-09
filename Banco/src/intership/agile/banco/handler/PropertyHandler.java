@@ -53,6 +53,4 @@ public class PropertyHandler {
         System.getProperties().store(out, "---No Comment---");
         out.close();
     }
-
-
 }
