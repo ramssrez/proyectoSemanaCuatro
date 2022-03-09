@@ -15,9 +15,10 @@ public class Principal {
     private static final String APPLICATIONS_PROPERTIES = "application.properties";
     private static final byte TRY_LIMIT = 3;
     private static List<Cliente> clientes = new ArrayList<>();
-    private  static AdministradorCliente administradorCliente = new AdministradorCliente();
+    private static AdministradorCliente administradorCliente = new AdministradorCliente();
 
     public static void main(String[] args) {
+
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
             String username, password;
@@ -68,9 +69,9 @@ public class Principal {
                 case "crear-cliente":
                     crearCliente();
                     break;
-                case "lista-cliente":
+                case "lista-clientes":
                     //printPath();
-                    listaCliente();
+                    listaClientes();
                     break;
                 case "print-java-home":
                     //printJavaHome();
@@ -97,7 +98,7 @@ public class Principal {
         System.out.println("Lista de comandos disponibles ");
         System.out.println("- ayuda\n" +
                 "- crear-cliente\n" +
-                "- lista-cliente\n" +
+                "- lista-clientes\n" +
                 "- print-java-home\n" +
                 "- sys-username\n" +
                 "- divide-double\n" +
@@ -110,14 +111,18 @@ public class Principal {
         cliente.setIngresoMensual(validarDouble("Ingresa el sueldo mensual: "));
         agregarCliente(cliente);
     }
-    private static void listaCliente(){
-        if (clientes != null){
-            clientes = administradorCliente.listaClientes();
-            System.out.println(clientes);
+    private static void listaClientes(){
+        clientes = administradorCliente.listaClientes();
+        if (!clientes.isEmpty()){
+            impresionCliente();
         }else{
             System.out.println("No se cuenta con registro de clientes");
         }
-
+    }
+    public static void impresionCliente(){
+        for (Cliente cliente : clientes){
+            System.out.println(cliente.getIdCliente() + " : " + cliente.getNombre());
+        }
     }
     private static void agregarCliente(Cliente cliente){
         administradorCliente.agregarCliente(cliente);

@@ -10,9 +10,11 @@ public class AdministradorCliente {
     }
 
     public void agregarCliente(Cliente cliente){
+        System.out.println("****** agregar cliente");
         clientes.add(cliente);
     }
     public List<Cliente> listaClientes(){
+        System.out.println("****** lista cliente");
         return clientes;
     }
     public Cliente getCliente(Cliente cliente){
