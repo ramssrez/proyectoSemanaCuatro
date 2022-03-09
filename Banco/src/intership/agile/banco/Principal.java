@@ -18,7 +18,7 @@ public class Principal {
     private static AdministradorCliente administradorCliente = new AdministradorCliente();
 
     public static void main(String[] args) {
-
+        clientes = administradorCliente.listaClientes();
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
             String username, password;
@@ -73,8 +73,8 @@ public class Principal {
                     //printPath();
                     listaClientes();
                     break;
-                case "print-java-home":
-                    //printJavaHome();
+                case "buscar-cliente":
+                    buscarCliente();
                     break;
                 case "sys-username":
                     //printSystemUsername();
@@ -99,11 +99,21 @@ public class Principal {
         System.out.println("- ayuda\n" +
                 "- crear-cliente\n" +
                 "- lista-clientes\n" +
-                "- print-java-home\n" +
+                "- buscar-cliente\n" +
                 "- sys-username\n" +
                 "- divide-double\n" +
                 "- divide-integer\n" +
                 "- exit");
+    }
+
+    private static void buscarCliente(){
+        int entero = validarEntero("Ingresa el id del cliente: ");
+        Cliente cliente = administradorCliente.getCliente(entero,clientes);
+        if (cliente != null){
+            System.out.println(cliente.toString());
+        }else{
+            System.out.println("No se ha encontrado un cliente");
+        }
     }
     private static void crearCliente(){
         Cliente cliente = new Cliente();
@@ -112,7 +122,6 @@ public class Principal {
         agregarCliente(cliente);
     }
     private static void listaClientes(){
-        clientes = administradorCliente.listaClientes();
         if (!clientes.isEmpty()){
             impresionCliente();
         }else{
@@ -137,6 +146,20 @@ public class Principal {
                 bandera = true;
             }catch (Exception e){
                 System.out.println("Valor incorrecto, se espera un double");
+            }
+        }
+        return valor;
+    }
+    private static int validarEntero(String argumento){
+        int valor  = 0;
+        boolean bandera = false;
+        while (!bandera){
+            try {
+                System.out.print(argumento);
+                valor = Integer.parseInt(System.console().readLine());
+                bandera = true;
+            }catch (Exception e){
+                System.out.println("Valor incorrecto, se espera un entero");
             }
         }
         return valor;
