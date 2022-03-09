@@ -102,21 +102,35 @@ public class Principal {
     private static void crearCliente(){
         Cliente cliente = new Cliente();
         cliente.setNombre(validarString("Nombre Cliente: "));
+        cliente.setIngresoMensual(validarDouble("Ingresa el sueldo mensual"));
         //System.out.print("Ingresa el nombre del cliente: ");
         //cliente.setNombre(System.console().readLine());
         //System.out.print("Ingresa el sueldo mensual del cliente: ");
         //cliente.setIngresoMensual(Double.parseDouble(System.console().readLine()));
         //System.out.println(cliente.toString());
     }
-    private static String validarString(String argumento){
+    private static double validarDouble(String argumento){
+        double valor  = 0.0;
         boolean bandera = false;
-        String s = "";
-
         while (!bandera){
             try {
                 System.out.print(argumento);
-                s = System.console().readLine();
-                if (!contieneSoloLetras(s)){
+                valor = Double.parseDouble(System.console().readLine());
+                bandera = true;
+            }catch (Exception e){
+                System.out.println("Valor incorrecto, se espera un double");
+            }
+        }
+        return valor;
+    }
+    private static String validarString(String argumento){
+        boolean bandera = false;
+        String string = "";
+        while (!bandera){
+            try {
+                System.out.print(argumento);
+                string = System.console().readLine();
+                if (!soloLetras(string) || string.isEmpty()){
                     System.err.println("Nombre incorrecto, intenta de nuevo");
                 }else {
                     bandera = true;
@@ -125,11 +139,9 @@ public class Principal {
                 System.out.println("Valor incorrecto, se espera un string");
             }
         }
-        return s;
+        return string;
     }
-
-    public static boolean contieneSoloLetras(String cadena) {
-        System.out.println("Si entra al metodo");
+    public static boolean soloLetras(String cadena) {
         for (int x = 0; x < cadena.length(); x++) {
             char c = cadena.charAt(x);
             if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == ' ')) {
