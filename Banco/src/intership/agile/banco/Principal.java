@@ -6,6 +6,9 @@ import intership.agile.banco.classhelp.Configuracion;
 import intership.agile.banco.classhelp.Validacion;
 import intership.agile.banco.handler.PropertyHandler;
 import intership.agile.banco.model.Cliente;
+import intership.agile.banco.model.CuentaCheques;
+import intership.agile.banco.model.CuentaInversion;
+import intership.agile.banco.model.TarjetaCredito;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +31,6 @@ public class Principal {
         Configuracion configuracion = new Configuracion();
         configuracion.setMaxLineaCreditoPorIngresoMensual(4.0);
         administradorProducto = new AdministradorProducto(configuracion);
-        //administradorProducto.
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
             String username, password;
@@ -127,18 +129,17 @@ public class Principal {
         Cliente cliente = retornarCliente();
         if (cliente!= null){
             printcomandos();
-            commandListenerProductos();
+            commandListenerProductos(cliente);
         }
     }
-    private static void commandListenerProductos() {
+    private static void commandListenerProductos(Cliente cliente) {
         String command;
         do {
             System.out.print(">- ");
             command = System.console().readLine();
             switch (command) {
                 case "tarjeta-credito":
-                    //printHelp();
-                    System.out.println("Tarjeta de credito");
+                    crearTarjeta(cliente);
                     break;
                 case "cuenta-cheques":
                     System.out.println("Cuenta de cheques");
@@ -155,6 +156,14 @@ public class Principal {
             }
         } while(!"exit".equalsIgnoreCase(command));
         System.out.println("Retornando al menú principal....");
+    }
+    private static void crearTarjeta(Cliente cliente){
+        TarjetaCredito tarjetaCredito = new TarjetaCredito(Validacion.validarDouble("Ingresa la línea de crédito: "));
+        administradorProducto.agregarProducto(cliente,tarjetaCredito);
+        //administradorProducto.;
+        //return tarjetaCredito;
+        //CuentaInversion cuentaInversion = new CuentaInversion(1000.0, 0.05);
+        //CuentaCheques cuentaCheques = new CuentaCheques(20000,5.0);
     }
     private static Cliente retornarCliente(){
         int entero = Validacion.validarEntero("Ingresa el id del cliente: ");
