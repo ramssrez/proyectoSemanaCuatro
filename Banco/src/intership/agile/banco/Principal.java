@@ -66,7 +66,7 @@ public class Principal {
             System.err.printf("%s: %s%n", e.getClass().getName(), e.getMessage());
         }
     }
-    private static void runCommandListener() {
+    public static void runCommandListener() {
         String command;
         do {
             System.out.print("$ ");
@@ -86,7 +86,7 @@ public class Principal {
                 case "buscar-cliente":
                     buscarCliente();
                     break;
-                case "sys-username":
+                case "producto-cliente":
                     //printSystemUsername();
                     break;
                 case "divide-double":
@@ -109,8 +109,8 @@ public class Principal {
         System.out.println("- ayuda: Muestra los comandos disponibles en la aplicación\n" +
                 "- crear-cliente: Crea un nuevo cliente.\n" +
                 "- lista-clientes: Muestra los clientes con los que se cuenta.\n" +
-                "- buscar-cliente: Busca a los usuarios con el id del cliente.\n" +
-                "- producto-cliente: Crea un producto financiero del cliente\n" +
+                "- buscar-cliente: Busca a un cliente con su id.\n" +
+                "- producto-cliente: Crea un producto financiero para el cliente\n" +
                 "- divide-double\n" +
                 "- divide-integer\n" +
                 "- exit");
@@ -128,7 +128,9 @@ public class Principal {
     private static void crearCliente(){
         Cliente cliente = new Cliente();
         cliente.setNombre(Validacion.validarString("Ingresa el nombre: "));
+        //cliente.setNumCliente(C);
         cliente.setIngresoMensual(Validacion.validarDouble("Ingresa el sueldo mensual: "));
+
         agregarCliente(cliente);
     }
     private static void listaClientes(){

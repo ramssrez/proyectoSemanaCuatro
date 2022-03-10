@@ -6,10 +6,13 @@ public class TarjetaCredito implements ProductoFinanciero {
 
     private double lineaCredito;
     private double saldo;
+    private int idTarjetaCredito;
+    private static int contador;
 
     public TarjetaCredito(double lineaCredito) {
         this.lineaCredito = lineaCredito;
         this.saldo = 0;
+        idTarjetaCredito = ++contador;
     }
 
     public double getLineaCredito() {
@@ -40,4 +43,12 @@ public class TarjetaCredito implements ProductoFinanciero {
             saldo -= importe;
     }
 
+    @Override
+    public String toString() {
+        return "TarjetaCredito{" +
+                "lineaCredito=" + lineaCredito +
+                ", saldo=" + saldo +
+                ", idTarjetaCredito=" + idTarjetaCredito +
+                '}';
+    }
 }

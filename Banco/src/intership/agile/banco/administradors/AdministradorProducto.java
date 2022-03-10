@@ -21,7 +21,7 @@ public class AdministradorProducto {
     }
 
     public void agregarProducto(Cliente cliente, ProductoFinanciero producto) {
-        List<ProductoFinanciero> productos = mapaProductos.get(cliente.getNumCliente());
+        List<ProductoFinanciero> productos = mapaProductos.get(cliente.getIdCliente());
         if(productos == null) {
             productos = new ArrayList<>();
             mapaProductos.put(cliente.getIdCliente(), productos);
@@ -49,7 +49,7 @@ public class AdministradorProducto {
         productos.add(producto);
     }
 
-    public List<ProductoFinanciero> getProductos(String numCliente) {
+    public List<ProductoFinanciero> getProductos(Integer numCliente) {
         List<ProductoFinanciero> productos = mapaProductos.get(numCliente);
         if(productos == null)
             System.out.println("El cliente no tiene productos asignados");
@@ -57,7 +57,7 @@ public class AdministradorProducto {
     }
 
     public boolean puedeCancelar(Cliente cliente) {
-        List<ProductoFinanciero> productos = getProductos(cliente.getNumCliente());
+        List<ProductoFinanciero> productos = getProductos(cliente.getIdCliente());
         boolean resultado = true;
         for(ProductoFinanciero pf : productos) {
             if(pf.getSaldo() != 0.0) {

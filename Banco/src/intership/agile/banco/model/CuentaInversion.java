@@ -4,10 +4,13 @@ public class CuentaInversion extends CuentaBancaria {
 
     private double interesAlCorte;
     private double iva ;
+    private int idCuentaInversion;
+    private static int contador;
 
     public CuentaInversion(double balanceInicial, double interesAlCorte) {
         super(balanceInicial);
         this.interesAlCorte = interesAlCorte;
+        idCuentaInversion = ++contador;
     }
 
     public void aplicarCorte(double iva) {
@@ -30,5 +33,14 @@ public class CuentaInversion extends CuentaBancaria {
         System.out.println("Tasa de Interés: " + interesAlCorte);
         System.out.println("Iva:  " + (iva*100) + "%");
         System.out.println("********************************");
+    }
+
+    @Override
+    public String toString() {
+        return "CuentaInversion{" +
+                "interesAlCorte=" + interesAlCorte +
+                ", iva=" + iva +
+                ", idCuentaInversion=" + idCuentaInversion +
+                '}';
     }
 }
