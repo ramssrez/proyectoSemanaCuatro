@@ -25,9 +25,9 @@ public class Principal {
 
     public static void main(String[] args) {
         clientes = administradorCliente.listaClientes();
-        //Configuracion configuracion = new Configuracion();
-        //configuracion.setMaxLineaCreditoPorIngresoMensual(4.0);
-        //administradorProducto = new AdministradorProducto(configuracion);
+        Configuracion configuracion = new Configuracion();
+        configuracion.setMaxLineaCreditoPorIngresoMensual(4.0);
+        administradorProducto = new AdministradorProducto(configuracion);
         //administradorProducto.
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
@@ -66,7 +66,7 @@ public class Principal {
             System.err.printf("%s: %s%n", e.getClass().getName(), e.getMessage());
         }
     }
-    public static void runCommandListener() {
+    private static void runCommandListener() {
         String command;
         do {
             System.out.print("$ ");
@@ -86,7 +86,8 @@ public class Principal {
                 case "buscar-cliente":
                     buscarCliente();
                     break;
-                case "producto-cliente":
+                case "agregar-producto":
+                    agregarProducto();
                     //printSystemUsername();
                     break;
                 case "divide-double":
@@ -110,16 +111,64 @@ public class Principal {
                 "- crear-cliente: Crea un nuevo cliente.\n" +
                 "- lista-clientes: Muestra los clientes con los que se cuenta.\n" +
                 "- buscar-cliente: Busca a un cliente con su id.\n" +
-                "- producto-cliente: Crea un producto financiero para el cliente\n" +
+                "- agregar-producto: Crea un producto financiero para el cliente\n" +
                 "- divide-double\n" +
                 "- divide-integer\n" +
                 "- exit");
     }
-
+    private static void printcomandos() {
+        System.out.println("Escribe un comando para agregar un nuevo producto ");
+        System.out.println("- tarjeta-credito: Crear y agregar tarjeta de credito.\n" +
+                "- cuenta-cheques: Crear y agregar cuenta de cheques.\n" +
+                "- cuenta-inversion: Crear y agregar cuenta de inversión.\n" +
+                "- exit: Salir del menú");
+    }
+    private static void agregarProducto(){
+        Cliente cliente = retornarCliente();
+        if (cliente!= null){
+            printcomandos();
+            commandListenerProductos();
+        }
+    }
+    private static void commandListenerProductos() {
+        String command;
+        do {
+            System.out.print(">- ");
+            command = System.console().readLine();
+            switch (command) {
+                case "tarjeta-credito":
+                    //printHelp();
+                    System.out.println("Tarjeta de credito");
+                    break;
+                case "cuenta-cheques":
+                    System.out.println("Cuenta de cheques");
+                    //crearCliente();
+                    break;
+                case "cuenta-inversion":
+                    //printPath();
+                    //listaClientes();
+                    break;
+                case "exit":
+                    break;
+                default:
+                    System.err.printf("\"%s\" No es un comando%n", command);
+            }
+        } while(!"exit".equalsIgnoreCase(command));
+        System.out.println("Retornando al menú principal....");
+    }
+    private static Cliente retornarCliente(){
+        int entero = Validacion.validarEntero("Ingresa el id del cliente: ");
+        Cliente cliente = administradorCliente.getCliente(entero,clientes);
+        if (cliente == null){
+            System.out.println("Cliente no encontrado");
+        }
+        return cliente;
+    }
     private static void buscarCliente(){
         int entero = Validacion.validarEntero("Ingresa el id del cliente: ");
         Cliente cliente = administradorCliente.getCliente(entero,clientes);
         if (cliente != null){
+            System.out.println("Cliente encontrado");
             System.out.println(cliente.toString());
         }else{
             System.out.println("No se ha encontrado un cliente");
@@ -128,19 +177,18 @@ public class Principal {
     private static void crearCliente(){
         Cliente cliente = new Cliente();
         cliente.setNombre(Validacion.validarString("Ingresa el nombre: "));
-        //cliente.setNumCliente(C);
         cliente.setIngresoMensual(Validacion.validarDouble("Ingresa el sueldo mensual: "));
-
         agregarCliente(cliente);
+        System.out.println("El cliente " + cliente.getNombre() + " ha sido creado");
     }
     private static void listaClientes(){
         if (!clientes.isEmpty()){
-            impresionCliente();
+            impresionClientes();
         }else{
             System.out.println("No se cuenta con registro de clientes");
         }
     }
-    public static void impresionCliente(){
+    private static void impresionClientes(){
         System.out.println("ID : Nombre"  );
         for (Cliente cliente : clientes){
             System.out.println(cliente.getIdCliente() + " : " + cliente.getNombre());

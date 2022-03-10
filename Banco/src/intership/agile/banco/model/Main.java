@@ -39,14 +39,31 @@ public class Main {
         TarjetaCredito tarjetaCredito = new TarjetaCredito(7000);
         CuentaInversion cuentaInversion = new CuentaInversion(1000.0, 0.05);
         CuentaCheques cuentaCheques = new CuentaCheques(20000,5.0);
+
+        TarjetaCredito tarjetaCredito1 = new TarjetaCredito(7000);
+        CuentaInversion cuentaInversion1 = new CuentaInversion(1000.0, 0.05);
+        CuentaCheques cuentaCheques1 = new CuentaCheques(20000,5.0);
+
+        TarjetaCredito tarjetaCredito2 = new TarjetaCredito(7000);
+        CuentaInversion cuentaInversion2 = new CuentaInversion(1000.0, 0.05);
+        CuentaCheques cuentaCheques2 = new CuentaCheques(20000,5.0);
+
         administradorProducto.agregarProducto(cliente1,tarjetaCredito);
         administradorProducto.agregarProducto(cliente1,cuentaCheques);
         administradorProducto.agregarProducto(cliente1,cuentaInversion);
-        List<ProductoFinanciero> productoFinancieros = administradorProducto.getProductos(1);
+
+        administradorProducto.agregarProducto(cliente2,tarjetaCredito2);
+        administradorProducto.agregarProducto(cliente2,cuentaCheques2);
+        administradorProducto.agregarProducto(cliente2,cuentaInversion2);
+
+        administradorProducto.agregarProducto(cliente3,tarjetaCredito1);
+        administradorProducto.agregarProducto(cliente3,cuentaCheques1);
+        administradorProducto.agregarProducto(cliente3,cuentaInversion1);
+
+        List<ProductoFinanciero> productoFinancieros = administradorProducto.getProductos(3);
         for (ProductoFinanciero producto : productoFinancieros){
             System.out.println(producto.toString());
         }
-
 
 
 
