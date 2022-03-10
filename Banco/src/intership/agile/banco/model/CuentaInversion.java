@@ -7,20 +7,14 @@ public class CuentaInversion extends CuentaBancaria {
     private int idCuentaInversion;
     private static int contador;
 
-    public CuentaInversion(double balanceInicial, double interesAlCorte) {
+    public CuentaInversion(double balanceInicial, double interesAlCorte, double iva) {
         super(balanceInicial);
         this.interesAlCorte = interesAlCorte;
+        this.iva = iva;
         idCuentaInversion = ++contador;
     }
 
-    public void aplicarCorte(double iva) {
-        // Balance 2000
-        // Tasa 5%
-        // Interes bruto 100
-        // Impuesto 15%
-        // Interes neto 85
-        // Balance 2085
-        this.iva = iva;
+    public void aplicarCorte() {
         double balanceTotal =interesAlCorte*getBalance()*(1-iva);
         agregarFondos(balanceTotal);
     }

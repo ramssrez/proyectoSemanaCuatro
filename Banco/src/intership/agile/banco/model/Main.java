@@ -37,15 +37,15 @@ public class Main {
         configuracion.setMaxLineaCreditoPorIngresoMensual(4);
         administradorProducto = new AdministradorProducto(configuracion);
         TarjetaCredito tarjetaCredito = new TarjetaCredito(7000);
-        CuentaInversion cuentaInversion = new CuentaInversion(1000.0, 0.05);
+        CuentaInversion cuentaInversion = new CuentaInversion(1000.0, 0.05,0.15);
         CuentaCheques cuentaCheques = new CuentaCheques(20000,5.0);
 
         TarjetaCredito tarjetaCredito1 = new TarjetaCredito(7000);
-        CuentaInversion cuentaInversion1 = new CuentaInversion(1000.0, 0.05);
+        CuentaInversion cuentaInversion1 = new CuentaInversion(1000.0, 0.05,0.15);
         CuentaCheques cuentaCheques1 = new CuentaCheques(20000,5.0);
 
         TarjetaCredito tarjetaCredito2 = new TarjetaCredito(7000);
-        CuentaInversion cuentaInversion2 = new CuentaInversion(1000.0, 0.05);
+        CuentaInversion cuentaInversion2 = new CuentaInversion(1000.0, 0.05,0.15);
         CuentaCheques cuentaCheques2 = new CuentaCheques(20000,5.0);
 
         administradorProducto.agregarProducto(cliente1,tarjetaCredito);

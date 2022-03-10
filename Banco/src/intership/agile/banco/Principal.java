@@ -82,7 +82,6 @@ public class Principal {
                     crearCliente();
                     break;
                 case "lista-clientes":
-                    //printPath();
                     listaClientes();
                     break;
                 case "buscar-cliente":
@@ -90,7 +89,6 @@ public class Principal {
                     break;
                 case "agregar-producto":
                     agregarProducto();
-                    //printSystemUsername();
                     break;
                 case "divide-double":
                     //divisionDouble();
@@ -135,19 +133,18 @@ public class Principal {
     private static void commandListenerProductos(Cliente cliente) {
         String command;
         do {
-            System.out.print(">- ");
+            System.out.println("Productos para " + cliente.getNombre());
+            System.out.print("producto >- ");
             command = System.console().readLine();
             switch (command) {
                 case "tarjeta-credito":
                     crearTarjeta(cliente);
                     break;
                 case "cuenta-cheques":
-                    System.out.println("Cuenta de cheques");
-                    //crearCliente();
+                    crearCuentaCheques(cliente);
                     break;
                 case "cuenta-inversion":
-                    //printPath();
-                    //listaClientes();
+                    crearCuentaInversion(cliente);
                     break;
                 case "exit":
                     break;
@@ -160,10 +157,22 @@ public class Principal {
     private static void crearTarjeta(Cliente cliente){
         TarjetaCredito tarjetaCredito = new TarjetaCredito(Validacion.validarDouble("Ingresa la línea de crédito: "));
         administradorProducto.agregarProducto(cliente,tarjetaCredito);
-        //administradorProducto.;
-        //return tarjetaCredito;
-        //CuentaInversion cuentaInversion = new CuentaInversion(1000.0, 0.05);
-        //CuentaCheques cuentaCheques = new CuentaCheques(20000,5.0);
+        System.out.println("Se ha agregado una tarjeta de crédito");
+    }
+    private static void crearCuentaCheques(Cliente cliente){
+        String balanceInicial = "Ingresa el balance inicial ";
+        String comisionRetiro = "Ingresa la comisión del retiro ";
+        CuentaCheques cuentaCheques = new CuentaCheques(Validacion.validarDouble(balanceInicial),Validacion.validarDouble(comisionRetiro));
+        administradorProducto.agregarProducto(cliente,cuentaCheques);
+        System.out.println("Se ha agregado una cuenta de cheques");
+    }
+    private static void crearCuentaInversion(Cliente cliente){
+        double balanceInicial = Validacion.validarDouble("Ingresa el balance inicial: ");
+        double interesCorte = Validacion.validarDouble("Ingresa el interes al corte: ");
+        double iva = Validacion.validarDouble("Ingresa el iva: ");
+        CuentaInversion cuentaInversion = new CuentaInversion(balanceInicial,interesCorte,iva);
+        administradorProducto.agregarProducto(cliente,cuentaInversion);
+        System.out.println("Se ha agregado una cuenta de inversión");
     }
     private static Cliente retornarCliente(){
         int entero = Validacion.validarEntero("Ingresa el id del cliente: ");
