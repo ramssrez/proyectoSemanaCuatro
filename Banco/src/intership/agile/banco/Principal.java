@@ -31,6 +31,10 @@ public class Principal {
         Configuracion configuracion = new Configuracion();
         configuracion.setMaxLineaCreditoPorIngresoMensual(4.0);
         administradorProducto = new AdministradorProducto(configuracion);
+        Cliente cliente = new Cliente();
+        cliente.setNombre("Juan");
+        cliente.setIngresoMensual(18000);
+        clientes.add(cliente);
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
             String username, password;
@@ -126,11 +130,12 @@ public class Principal {
     private static void agregarProducto(){
         Cliente cliente = retornarCliente();
         if (cliente!= null){
+            int numeroCliente = clientes.indexOf(cliente);
             printcomandos();
-            commandListenerProductos(cliente);
+            commandListenerProductos(cliente, numeroCliente);
         }
     }
-    private static void commandListenerProductos(Cliente cliente) {
+    private static void commandListenerProductos(Cliente cliente, int numero) {
         String command;
         do {
             System.out.println("Productos para " + cliente.getNombre());
@@ -152,12 +157,14 @@ public class Principal {
                     System.err.printf("\"%s\" No es un comando%n", command);
             }
         } while(!"exit".equalsIgnoreCase(command));
+        clientes.set(numero,cliente);
         System.out.println("Retornando al menú principal....");
     }
     private static void crearTarjeta(Cliente cliente){
         TarjetaCredito tarjetaCredito = new TarjetaCredito(Validacion.validarDouble("Ingresa la línea de crédito: "));
         administradorProducto.agregarProducto(cliente,tarjetaCredito);
         System.out.println("Se ha agregado una tarjeta de crédito");
+        cliente.setTarjetaCredito(true);
     }
     private static void crearCuentaCheques(Cliente cliente){
         String balanceInicial = "Ingresa el balance inicial ";
@@ -165,14 +172,20 @@ public class Principal {
         CuentaCheques cuentaCheques = new CuentaCheques(Validacion.validarDouble(balanceInicial),Validacion.validarDouble(comisionRetiro));
         administradorProducto.agregarProducto(cliente,cuentaCheques);
         System.out.println("Se ha agregado una cuenta de cheques");
+        cliente.setCuentaCheques(true);
     }
     private static void crearCuentaInversion(Cliente cliente){
-        double balanceInicial = Validacion.validarDouble("Ingresa el balance inicial: ");
-        double interesCorte = Validacion.validarDouble("Ingresa el interes al corte: ");
-        double iva = Validacion.validarDouble("Ingresa el iva: ");
-        CuentaInversion cuentaInversion = new CuentaInversion(balanceInicial,interesCorte,iva);
-        administradorProducto.agregarProducto(cliente,cuentaInversion);
-        System.out.println("Se ha agregado una cuenta de inversión");
+        if(cliente.isCuentaCheques()){
+            double balanceInicial = Validacion.validarDouble("Ingresa el balance inicial: ");
+            double interesCorte = Validacion.validarDouble("Ingresa el interes al corte: ");
+            double iva = Validacion.validarDouble("Ingresa el iva: ");
+            CuentaInversion cuentaInversion = new CuentaInversion(balanceInicial,interesCorte,iva);
+            administradorProducto.agregarProducto(cliente,cuentaInversion);
+            System.out.println("Se ha agregado una cuenta de inversión");
+            cliente.setCuentaInversion(true);
+        }else{
+            System.out.println("Se necesita una cuenta de cheques para poder tener una cuenta de inversion");
+        }
     }
     private static Cliente retornarCliente(){
         int entero = Validacion.validarEntero("Ingresa el id del cliente: ");

@@ -64,6 +64,13 @@ public class Main {
         for (ProductoFinanciero producto : productoFinancieros){
             System.out.println(producto.toString());
         }
+        System.out.println(clientes.contains(cliente1));
+        if (clientes.contains(cliente1)){
+            //clientes.get(cliente1);
+            clientes.indexOf(cliente1);
+            System.out.println(clientes.indexOf(cliente4));
+        }
+
 
 
 
