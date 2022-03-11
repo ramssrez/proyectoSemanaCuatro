@@ -40,6 +40,7 @@ public class PropertyHandler {
         return System.getProperty(key);
     }
 
+    /*
     public static void setProperty(String key, String value) {
         System.setProperty(key, value);
     }
@@ -47,6 +48,8 @@ public class PropertyHandler {
     public static void clearProperty(String key) {
         System.getProperties().remove(key);
     }
+
+     */
 
     public static void persist() throws FileNotFoundException, IOException {
         FileOutputStream out = new FileOutputStream(System.getProperty(PROP_PROPS_FILE));

@@ -34,8 +34,9 @@ public class Principal {
         Configuracion configuracion = new Configuracion();
         configuracion.setMaxLineaCreditoPorIngresoMensual(4.0);
         administradorProducto = new AdministradorProducto(configuracion);
-        clienteGeneral = -1;
+        clienteGeneral = 0;
         productoFinancieros =null;
+        /*
         //Lineas de pruebas
         Cliente cliente = new Cliente();
         cliente.setNombre("Juan");
@@ -72,6 +73,7 @@ public class Principal {
         administradorProducto.agregarProducto(cliente,tarjetaCredito1);
         administradorProducto.agregarProducto(cliente,cuentaCheques1);
         administradorProducto.agregarProducto(cliente,cuentaInversion1);
+         */
 
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
@@ -135,8 +137,8 @@ public class Principal {
                 case "movimiento-productos":
                     movimientoProductos();
                     break;
-                case "divide-integer":
-                    //divisionEntera();
+                case "estado-cuenta":
+                    ImpresionEstados();
                     break;
                 case "exit":
                     // No recomendado: En la mayoría de los casos, no se recomienda invocar a System.exit(int)
@@ -155,7 +157,7 @@ public class Principal {
                 "- buscar-cliente: Busca a un cliente con su id.\n" +
                 "- agregar-producto: Crea un producto financiero para el cliente\n" +
                 "- movimiento-productos: Puede realizar movimientos en los productos\n" +
-                "- divide-integer\n" +
+                "- estado-cuenta: Impresion del estado de cuenta del usuario\n" +
                 "- exit");
     }
     private static void printcomandos() {
@@ -336,6 +338,18 @@ public class Principal {
         }
         return productoFinanciero;
     }
+
+    private static void ImpresionEstados() {
+        List<ProductoFinanciero> productoFinancieroList = retornarlistaProductos();
+        if (productoFinancieroList != null) {
+            System.out.println("El cliente cuenta con los siguientes productos");
+            System.out.println("El cliente " + clientes.get(clienteGeneral-1).getNombre() + " tiene");
+            for (ProductoFinanciero producto : productoFinancieroList) {
+                producto.imprimirEstadoCuenta();
+            }
+        }
+        clienteGeneral =0;
+    }
     private static void movimientoProductos(){
         List<ProductoFinanciero> productoFinancieroList = retornarlistaProductos();
         if (productoFinancieroList != null){
@@ -362,12 +376,13 @@ public class Principal {
                     System.out.println("Es una cuenta de inversion");
                 }
                 productoFinancieroList.set(numeroProducto,productoFinanciero);
-            }catch (NullPointerException e) {
+                administradorProducto.setMapaProductos(clienteGeneral,productoFinancieroList);
+                clienteGeneral = 0;
+            }catch (NullPointerException  | ArrayIndexOutOfBoundsException e) {
                 System.out.println("No existe el producto seleccionado");
             }
         }
-        administradorProducto.setMapaProductos(clienteGeneral,productoFinancieroList);
-        clienteGeneral = -1;
+
     }
     private static void agregarProducto(){
         Cliente cliente = retornarCliente();

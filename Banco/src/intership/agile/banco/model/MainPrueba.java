@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class MainPrueba {
     private static List<Cliente> clientes = new ArrayList<>();
     private static AdministradorCliente administradorCliente = new AdministradorCliente();
     private static AdministradorProducto administradorProducto;
