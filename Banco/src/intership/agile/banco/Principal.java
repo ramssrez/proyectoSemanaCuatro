@@ -32,10 +32,43 @@ public class Principal {
         Configuracion configuracion = new Configuracion();
         configuracion.setMaxLineaCreditoPorIngresoMensual(4.0);
         administradorProducto = new AdministradorProducto(configuracion);
+        //Lineas de pruebas
         Cliente cliente = new Cliente();
         cliente.setNombre("Juan");
         cliente.setIngresoMensual(18000);
+        Cliente cliente1 = new Cliente();
+        cliente1.setNombre("Jose");
+        cliente1.setIngresoMensual(19000);
+        Cliente cliente2 = new Cliente();
+        cliente2.setNombre("Ivan");
+        cliente2.setIngresoMensual(17000);
         clientes.add(cliente);
+        clientes.add(cliente1);
+        clientes.add(cliente2);
+        TarjetaCredito tarjetaCredito = new TarjetaCredito(7000);
+        CuentaInversion cuentaInversion = new CuentaInversion(1000.0, 0.05,0.15);
+        CuentaCheques cuentaCheques = new CuentaCheques(20000,5.0);
+
+        TarjetaCredito tarjetaCredito1 = new TarjetaCredito(8000);
+        CuentaInversion cuentaInversion1 = new CuentaInversion(2000.0, 0.05,0.15);
+        CuentaCheques cuentaCheques1 = new CuentaCheques(30000,5.0);
+
+        TarjetaCredito tarjetaCredito2 = new TarjetaCredito(9000);
+        CuentaInversion cuentaInversion2 = new CuentaInversion(3000.0, 0.05,0.15);
+        CuentaCheques cuentaCheques2 = new CuentaCheques(40000,5.0);
+
+        administradorProducto.agregarProducto(cliente1,tarjetaCredito);
+        administradorProducto.agregarProducto(cliente1,cuentaCheques);
+        administradorProducto.agregarProducto(cliente1,cuentaInversion);
+
+        administradorProducto.agregarProducto(cliente2,tarjetaCredito2);
+        administradorProducto.agregarProducto(cliente2,cuentaCheques2);
+        administradorProducto.agregarProducto(cliente2,cuentaInversion2);
+
+        administradorProducto.agregarProducto(cliente,tarjetaCredito1);
+        administradorProducto.agregarProducto(cliente,cuentaCheques1);
+        administradorProducto.agregarProducto(cliente,cuentaInversion1);
+
         try {
             PropertyHandler.load(DEFAULT_PROPERTIES, APPLICATIONS_PROPERTIES);
             String username, password;
@@ -123,6 +156,14 @@ public class Principal {
     }
     private static void printcomandos() {
         System.out.println("Escribe un comando para agregar un nuevo producto ");
+        System.out.println("- ayuda: Muestra los comandos disponibles en esta sección\n"+
+                "- tarjeta-credito: Crear y agregar tarjeta de credito.\n" +
+                "- cuenta-cheques: Crear y agregar cuenta de cheques.\n" +
+                "- cuenta-inversion: Crear y agregar cuenta de inversión.\n" +
+                "- exit: Salir del menú");
+    }
+    private static void printcomandosProdutos( ) {
+        System.out.println("Escribe un comando para agregar un nuevo producto ");
         System.out.println("- ayuda: Muestra los comandos disponibles en la aplicación\n"+
                 "- tarjeta-credito: Crear y agregar tarjeta de credito.\n" +
                 "- cuenta-cheques: Crear y agregar cuenta de cheques.\n" +
@@ -157,8 +198,64 @@ public class Principal {
         clientes.set(numero,cliente);
         System.out.println("Retornando al menú principal....");
     }
-    private static void movimientoProductos(){
+    /*
+    private static void commandListenerOpcionesProductos(List<ProductoFinanciero>) {
+        String command;
+        do {
+            //System.out.println("Productos para " + cliente.getNombre());
+            System.out.print("producto >- ");
+            command = System.console().readLine();
+            switch (command) {
+                case "tarjeta-credito":
+                    //crearTarjeta(cliente);
+                    break;
+                case "cuenta-cheques":
+                    //crearCuentaCheques(cliente);
+                    break;
+                case "cuenta-inversion":
+                    //crearCuentaInversion(cliente);
+                    break;
+                case "ayuda":
+                    //printcomandos();
+                    break;
+                case "exit":
+                    break;
+                default:
+                    System.err.printf("\"%s\" No es un comando%n", command);
+            }
+        } while(!"exit".equalsIgnoreCase(command));
+        //clientes.set(numero,cliente);
+        System.out.println("Retornando al menú principal....");
+    }
 
+     */
+    private static ProductoFinanciero existeProducto( List<ProductoFinanciero> productoFinancieroList, String opcion){
+        ProductoFinanciero productoFinanciero = null;
+        for (ProductoFinanciero producto : productoFinancieroList){
+            if (producto.obtenerNombreClase().equals(opcion)){
+                productoFinanciero = producto;
+                break;
+            }
+        }
+        return productoFinanciero;
+    }
+    private static void movimientoProductos(){
+        List<ProductoFinanciero> productoFinancieroList = retornarlistaProductos();
+        if (productoFinancieroList != null){
+            System.out.println("El cliente cuenta con los siguientes productos");
+            for (ProductoFinanciero producto: productoFinancieroList){
+                System.out.println(producto.toString());
+            }
+            ProductoFinanciero productoFinanciero = null;
+            String opcion = Validacion.validarString("Escribe un producto por su nombre sin espacios y respetando mayusculas: ");
+            try {
+                productoFinanciero = existeProducto(productoFinancieroList,opcion);
+                System.out.println("productoFinanciero = " + productoFinanciero.toString());
+
+            }catch (NullPointerException e){
+                System.out.println("No existe el producto seleccionado");
+            }
+        }
     }
     private static void agregarProducto(){
         Cliente cliente = retornarCliente();
@@ -195,13 +292,23 @@ public class Principal {
             System.out.println("Se necesita una cuenta de cheques para poder tener una cuenta de inversion");
         }
     }
-    private static Cliente retornarCliente(){
+    private static Cliente retornarCliente() {
         int entero = Validacion.validarEntero("Ingresa el id del cliente: ");
-        Cliente cliente = administradorCliente.getCliente(entero,clientes);
-        if (cliente == null){
+        Cliente cliente = administradorCliente.getCliente(entero, clientes);
+        if (cliente == null) {
             System.out.println("Cliente no encontrado");
         }
         return cliente;
+    }
+    private static List<ProductoFinanciero> retornarlistaProductos(){
+        int entero = Validacion.validarEntero("Ingresa el id del cliente: ");
+        List<ProductoFinanciero> productoFinancieroList = null;
+        try {
+            productoFinancieroList = administradorProducto.getProductos(entero);
+        }catch (NullPointerException e){
+            System.out.println("El cliente aún no cuenta con productos");
+        }
+        return productoFinancieroList;
     }
     private static void buscarCliente(){
         int entero = Validacion.validarEntero("Ingresa el id del cliente: ");

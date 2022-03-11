@@ -45,7 +45,7 @@ public class TarjetaCredito implements ProductoFinanciero {
 
     @Override
     public String toString() {
-        return "Tarjeta Credito" + getClass().getName();
+        return "Tarjeta Credito";
     }
     public String obtenerNombreClase(){
         return getClass().getSimpleName();
