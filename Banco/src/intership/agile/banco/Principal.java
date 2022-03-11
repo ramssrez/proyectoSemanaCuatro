@@ -94,8 +94,8 @@ public class Principal {
                 case "agregar-producto":
                     agregarProducto();
                     break;
-                case "divide-double":
-                    //divisionDouble();
+                case "movimiento-productos":
+                    movimientoProductos();
                     break;
                 case "divide-integer":
                     //divisionEntera();
@@ -116,24 +116,17 @@ public class Principal {
                 "- lista-clientes: Muestra los clientes con los que se cuenta.\n" +
                 "- buscar-cliente: Busca a un cliente con su id.\n" +
                 "- agregar-producto: Crea un producto financiero para el cliente\n" +
-                "- divide-double\n" +
+                "- movimiento-productos: Puede realizar movimientos en los productos\n" +
                 "- divide-integer\n" +
                 "- exit");
     }
     private static void printcomandos() {
         System.out.println("Escribe un comando para agregar un nuevo producto ");
-        System.out.println("- tarjeta-credito: Crear y agregar tarjeta de credito.\n" +
+        System.out.println("- ayuda: Muestra los comandos disponibles en la aplicación\n"+
+                "- tarjeta-credito: Crear y agregar tarjeta de credito.\n" +
                 "- cuenta-cheques: Crear y agregar cuenta de cheques.\n" +
                 "- cuenta-inversion: Crear y agregar cuenta de inversión.\n" +
                 "- exit: Salir del menú");
-    }
-    private static void agregarProducto(){
-        Cliente cliente = retornarCliente();
-        if (cliente!= null){
-            int numeroCliente = clientes.indexOf(cliente);
-            printcomandos();
-            commandListenerProductos(cliente, numeroCliente);
-        }
     }
     private static void commandListenerProductos(Cliente cliente, int numero) {
         String command;
@@ -151,6 +144,9 @@ public class Principal {
                 case "cuenta-inversion":
                     crearCuentaInversion(cliente);
                     break;
+                case "ayuda":
+                    printcomandos();
+                    break;
                 case "exit":
                     break;
                 default:
@@ -159,6 +155,17 @@ public class Principal {
         } while(!"exit".equalsIgnoreCase(command));
         clientes.set(numero,cliente);
         System.out.println("Retornando al menú principal....");
+    }
+    private static void movimientoProductos(){
+
+    }
+    private static void agregarProducto(){
+        Cliente cliente = retornarCliente();
+        if (cliente!= null){
+            int numeroCliente = clientes.indexOf(cliente);
+            printcomandos();
+            commandListenerProductos(cliente, numeroCliente);
+        }
     }
     private static void crearTarjeta(Cliente cliente){
         TarjetaCredito tarjetaCredito = new TarjetaCredito(Validacion.validarDouble("Ingresa la línea de crédito: "));
