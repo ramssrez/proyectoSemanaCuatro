@@ -247,11 +247,19 @@ public class Principal {
                 System.out.println(producto.toString());
             }
             ProductoFinanciero productoFinanciero = null;
-            String opcion = Validacion.validarString("Escribe un producto por su nombre sin espacios y respetando mayusculas: ");
+            String opcion = Validacion.validarString("Escribe un producto  por su nombre sin espacios y respetando mayusculas: ");
             try {
                 productoFinanciero = existeProducto(productoFinancieroList,opcion);
                 System.out.println("productoFinanciero = " + productoFinanciero.toString());
-
+                if (productoFinanciero instanceof TarjetaCredito){
+                    System.out.println("Es una tarjete de credito");
+                }
+                if (productoFinanciero instanceof CuentaCheques){
+                    System.out.println("Es una Cuenta de cheques");
+                }
+                if (productoFinanciero instanceof CuentaInversion){
+                    System.out.println("Es una cuenta de inversion");
+                }
             }catch (NullPointerException e){
                 System.out.println("No existe el producto seleccionado");
             }
