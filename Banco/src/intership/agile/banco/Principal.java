@@ -174,6 +174,40 @@ public class Principal {
                 "- estado-cuenta: Impresión de estado estado de cuenta.\n" +
                 "- exit: Salir del menú");
     }
+    private static void cuentaChequesComandos() {
+        System.out.println("Escribe un comando para las diferentes opciones de la cuenta de cheques ");
+        System.out.println("- ayuda: Muestra los comandos disponibles en la aplicación\n"+
+                "- reducir-fondos: Realizar un retiro de la cuenta.\n" +
+                "- agregar-fondos: Agrega fondos a la cuenta.\n" +
+                "- estado-cuenta: Impresión de estado estado de cuenta.\n" +
+                "- exit: Salir del menú");
+    }
+    private static void commandCuentaCheques(ProductoFinanciero productoFinanciero) {
+        String command;
+        do {
+            System.out.print("cheques >- ");
+            command = System.console().readLine();
+            switch (command) {
+                case "reducir-fondos":
+                    reducirCheques((CuentaCheques) productoFinanciero);
+                    break;
+                case "agregar-fondos":
+                    agregarCheques((CuentaCheques) productoFinanciero);
+                    break;
+                case "estado-cuenta":
+                    impresionEstadoCuenta(productoFinanciero);
+                    break;
+                case "ayuda":
+                    cuentaChequesComandos();
+                    break;
+                case "exit":
+                    break;
+                default:
+                    System.err.printf("\"%s\" No es un comando%n", command);
+            }
+        } while(!"exit".equalsIgnoreCase(command));
+        System.out.println("Retornando al menú principal....");
+    }
     private static void commandTarjetaCredito(ProductoFinanciero productoFinanciero) {
         String command;
         do {
@@ -187,7 +221,7 @@ public class Principal {
                     cargarTarjeta((TarjetaCredito) productoFinanciero);
                     break;
                 case "estado-cuenta":
-                    impresionEstadoCuenta((TarjetaCredito) productoFinanciero);
+                    impresionEstadoCuenta(productoFinanciero);
                     break;
                 case "ayuda":
                     tarjetaCreditoComandos();
@@ -231,12 +265,20 @@ public class Principal {
     private static void pagarTarjeta(TarjetaCredito credito){
         credito.pagarTarjeta(Validacion.validarDouble("Ingresa el pago de la tarjeta: "));
     }
+
     private static void cargarTarjeta(TarjetaCredito credito){
         credito.cargarTarjeta(Validacion.validarDouble("Ingresa el cargo de la tarjeta: "));
     }
-    private static void impresionEstadoCuenta(TarjetaCredito credito){
-        credito.imprimirEstadoCuenta();
+    private static void impresionEstadoCuenta(ProductoFinanciero productoFinanciero){
+        productoFinanciero.imprimirEstadoCuenta();
     }
+    private static void reducirCheques(CuentaCheques cheques){
+        cheques.reducirFondos(Validacion.validarDouble("Ingresa el monto de retiro: "));
+    }
+    private static void agregarCheques(CuentaCheques cheques){
+        cheques.agregarFondos(Validacion.validarDouble("Ingresa el monto de ingreso: "));
+    }
+
     private static ProductoFinanciero existeProducto( List<ProductoFinanciero> productoFinancieroList, String opcion){
         ProductoFinanciero productoFinanciero = null;
         for (ProductoFinanciero producto : productoFinancieroList){
@@ -264,9 +306,12 @@ public class Principal {
                     commandTarjetaCredito(productoFinanciero);
                 }
                 if (productoFinanciero instanceof CuentaCheques){
-                    System.out.println("Es una Cuenta de cheques");
+                    cuentaChequesComandos();
+                    commandCuentaCheques(productoFinanciero);
                 }
                 if (productoFinanciero instanceof CuentaInversion){
+                    cuentaInversionComandos();
+                    commandCuentaInversion(productoFinanciero);
                     System.out.println("Es una cuenta de inversion");
                 }
                 productoFinancieroList.set(numeroProducto,productoFinanciero);
