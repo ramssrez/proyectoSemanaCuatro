@@ -182,6 +182,44 @@ public class Principal {
                 "- estado-cuenta: Impresión de estado estado de cuenta.\n" +
                 "- exit: Salir del menú");
     }
+    private static void cuentaInversionComandos() {
+        System.out.println("Escribe un comando para las diferentes opciones de la cuenta de cheques ");
+        System.out.println("- ayuda: Muestra los comandos disponibles en la aplicación\n"+
+                "- reducir-fondos: Realizar un retiro de la cuenta.\n" +
+                "- agregar-fondos: Agrega fondos a la cuenta.\n" +
+                "- aplicar-corte: Agrega fondos a la cuenta.\n" +
+                "- estado-cuenta: Impresión de estado estado de cuenta.\n" +
+                "- exit: Salir del menú");
+    }
+    private static void commandCuentaInversion(ProductoFinanciero productoFinanciero) {
+        String command;
+        do {
+            System.out.print("inversion >- ");
+            command = System.console().readLine();
+            switch (command) {
+                case "reducir-fondos":
+                    reducirInversion((CuentaInversion) productoFinanciero);
+                    break;
+                case "agregar-fondos":
+                    agregarInversion((CuentaInversion) productoFinanciero);
+                    break;
+                case "aplicar-corte":
+                    corteInversion((CuentaInversion) productoFinanciero);
+                    break;
+                case "estado-cuenta":
+                    impresionEstadoCuenta(productoFinanciero);
+                    break;
+                case "ayuda":
+                    cuentaInversionComandos();
+                    break;
+                case "exit":
+                    break;
+                default:
+                    System.err.printf("\"%s\" No es un comando%n", command);
+            }
+        } while(!"exit".equalsIgnoreCase(command));
+        System.out.println("Retornando al menú principal....");
+    }
     private static void commandCuentaCheques(ProductoFinanciero productoFinanciero) {
         String command;
         do {
@@ -277,6 +315,15 @@ public class Principal {
     }
     private static void agregarCheques(CuentaCheques cheques){
         cheques.agregarFondos(Validacion.validarDouble("Ingresa el monto de ingreso: "));
+    }
+    private static void reducirInversion(CuentaInversion inversion){
+        inversion.reducirFondos(Validacion.validarDouble("Ingresa el monto de retiro: "));
+    }
+    private static void agregarInversion(CuentaInversion inversion){
+        inversion.agregarFondos(Validacion.validarDouble("Ingresa el monto de ingreso: "));
+    }
+    private static void corteInversion(CuentaInversion inversion){
+        inversion.aplicarCorte();
     }
 
     private static ProductoFinanciero existeProducto( List<ProductoFinanciero> productoFinancieroList, String opcion){
