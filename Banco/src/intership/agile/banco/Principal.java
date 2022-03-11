@@ -5,6 +5,7 @@ import intership.agile.banco.administradors.AdministradorProducto;
 import intership.agile.banco.classhelp.Configuracion;
 import intership.agile.banco.classhelp.Validacion;
 import intership.agile.banco.handler.PropertyHandler;
+import intership.agile.banco.interfaces.ProductoFinanciero;
 import intership.agile.banco.model.Cliente;
 import intership.agile.banco.model.CuentaCheques;
 import intership.agile.banco.model.CuentaInversion;

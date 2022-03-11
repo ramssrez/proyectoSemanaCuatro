@@ -45,10 +45,9 @@ public class TarjetaCredito implements ProductoFinanciero {
 
     @Override
     public String toString() {
-        return "TarjetaCredito{" +
-                "lineaCredito=" + lineaCredito +
-                ", saldo=" + saldo +
-                ", idTarjetaCredito=" + idTarjetaCredito +
-                '}';
+        return "Tarjeta Credito" + getClass().getName();
+    }
+    public String obtenerNombreClase(){
+        return getClass().getSimpleName();
     }
 }

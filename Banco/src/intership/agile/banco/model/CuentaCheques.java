@@ -29,9 +29,12 @@ public class CuentaCheques extends CuentaBancaria {
 
     @Override
     public String toString() {
-        return "CuentaCheques{" +
-                "comisionRetiro=" + comisionRetiro +
-                ", idCuentaCheques=" + idCuentaCheques +
-                '}';
+        return "Cuenta Cheques";
     }
+
+    @Override
+    public String obtenerNombreClase() {
+        return getClass().getSimpleName();
+    }
+
 }

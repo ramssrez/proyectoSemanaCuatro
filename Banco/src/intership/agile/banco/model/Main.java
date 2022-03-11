@@ -20,10 +20,10 @@ public class Main {
     private static AdministradorProducto administradorProducto;
     public static void main(String[] args) {
         System.out.println("hola mundo");
-        Cliente cliente1 = new Cliente("Jesus","123",1800.0);
-        Cliente cliente2 = new Cliente("Tomas","124",1800.0);
-        Cliente cliente3 = new Cliente("Rosa","125",1800.0);
-        Cliente cliente4 = new Cliente("Guadalupe","126",1800.0);
+        Cliente cliente1 = new Cliente("Jesus","123",18000.0);
+        Cliente cliente2 = new Cliente("Tomas","124",19000.0);
+        Cliente cliente3 = new Cliente("Rosa","125",20000.0);
+        Cliente cliente4 = new Cliente("Guadalupe","126",21000.0);
         administradorCliente.agregarCliente(cliente1);
         administradorCliente.agregarCliente(cliente2);
         administradorCliente.agregarCliente(cliente3);
@@ -40,13 +40,13 @@ public class Main {
         CuentaInversion cuentaInversion = new CuentaInversion(1000.0, 0.05,0.15);
         CuentaCheques cuentaCheques = new CuentaCheques(20000,5.0);
 
-        TarjetaCredito tarjetaCredito1 = new TarjetaCredito(7000);
-        CuentaInversion cuentaInversion1 = new CuentaInversion(1000.0, 0.05,0.15);
-        CuentaCheques cuentaCheques1 = new CuentaCheques(20000,5.0);
+        TarjetaCredito tarjetaCredito1 = new TarjetaCredito(8000);
+        CuentaInversion cuentaInversion1 = new CuentaInversion(2000.0, 0.05,0.15);
+        CuentaCheques cuentaCheques1 = new CuentaCheques(30000,5.0);
 
-        TarjetaCredito tarjetaCredito2 = new TarjetaCredito(7000);
-        CuentaInversion cuentaInversion2 = new CuentaInversion(1000.0, 0.05,0.15);
-        CuentaCheques cuentaCheques2 = new CuentaCheques(20000,5.0);
+        TarjetaCredito tarjetaCredito2 = new TarjetaCredito(9000);
+        CuentaInversion cuentaInversion2 = new CuentaInversion(3000.0, 0.05,0.15);
+        CuentaCheques cuentaCheques2 = new CuentaCheques(40000,5.0);
 
         administradorProducto.agregarProducto(cliente1,tarjetaCredito);
         administradorProducto.agregarProducto(cliente1,cuentaCheques);
@@ -61,9 +61,41 @@ public class Main {
         administradorProducto.agregarProducto(cliente3,cuentaInversion1);
 
         List<ProductoFinanciero> productoFinancieros = administradorProducto.getProductos(3);
+        ProductoFinanciero productoFinanciero = null;
+        TarjetaCredito tarjetaCreditoSeleccin = null;
+        CuentaCheques cuentaChequesSeleccion = null;
+        CuentaInversion cuentaInversionSeleccion = null;
+        //productoFinancieros.
+        //System.out.println(productoFinancieros.get(1).);
         for (ProductoFinanciero producto : productoFinancieros){
-            System.out.println(producto.toString());
+            if (producto.obtenerNombreClase().equals("TarjetaCredito")){
+                productoFinanciero = producto;
+                break;
+            }
         }
+        System.out.println(productoFinanciero.obtenerNombreClase());
+        if(productoFinanciero instanceof TarjetaCredito) {
+            System.out.println("verdad");
+            tarjetaCreditoSeleccin = (TarjetaCredito) productoFinanciero;
+        }else {
+            System.out.println("Falso");
+        }
+        if(productoFinanciero instanceof CuentaInversion) {
+            cuentaInversion = (CuentaInversion) productoFinanciero;
+            System.out.println("verdad");
+        }else {
+            System.out.println("Falso");
+        }
+        if(productoFinanciero instanceof CuentaCheques) {
+            System.out.println("verdad");
+            cuentaCheques = (CuentaCheques) productoFinanciero;
+        }else {
+            System.out.println("Falso");
+        }
+        tarjetaCredito.cargarTarjeta(100);
+        //tarjetaCredito.pagarTarjeta(50);
+        tarjetaCredito.imprimirEstadoCuenta();
+/*
         System.out.println(clientes.contains(cliente1));
         if (clientes.contains(cliente1)){
             //clientes.get(cliente1);
@@ -71,8 +103,6 @@ public class Main {
             System.out.println(clientes.indexOf(cliente4));
         }
 
-
-
-
+ */
     }
 }

@@ -31,10 +31,11 @@ public class CuentaInversion extends CuentaBancaria {
 
     @Override
     public String toString() {
-        return "CuentaInversion{" +
-                "interesAlCorte=" + interesAlCorte +
-                ", iva=" + iva +
-                ", idCuentaInversion=" + idCuentaInversion +
-                '}';
+        return "Cuenta Inversion";
+    }
+
+    @Override
+    public String obtenerNombreClase() {
+        return getClass().getSimpleName();
     }
 }
