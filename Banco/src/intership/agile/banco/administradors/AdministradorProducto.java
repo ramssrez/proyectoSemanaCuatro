@@ -55,7 +55,9 @@ public class AdministradorProducto {
             System.out.println("El cliente no tiene productos asignados");
         return productos;
     }
-
+    public void setMapaProductos(Integer numer, List<ProductoFinanciero> lista){
+        mapaProductos.put(numer,lista);
+    }
     public boolean puedeCancelar(Cliente cliente) {
         List<ProductoFinanciero> productos = getProductos(cliente.getIdCliente());
         boolean resultado = true;
