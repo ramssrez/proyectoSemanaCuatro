@@ -1,2 +1,5 @@
-package interfaces;public class IFigura {
+package interfaces;
+
+public interface IFigura {
+    
 }

@@ -1,2 +1,4 @@
-package domain;public class Figura {
+package domain;
+
+public class Figura {
 }
