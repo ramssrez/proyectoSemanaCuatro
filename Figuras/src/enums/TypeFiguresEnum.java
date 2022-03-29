@@ -3,11 +3,11 @@ package enums;
 import constants.Messages;
 
 public enum TypeFiguresEnum {
-    CIRCULO(Messages.CIRCULO,1),
-    CUADRADO(Messages.CUADRADO, 2),
-    RECTANGULO(Messages.RECTANGULO, 3),
-    TRIANGULO_EQUILATERO(Messages.TRIANGULO_EQUILATERO, 4),
-    TRIANGULO_ISOSCELES(Messages.TRIANGULO_ISOSCELES, 5);
+    CIRCULO(Messages.CIRCLE,1),
+    CUADRADO(Messages.SQUARE, 2),
+    RECTANGULO(Messages.RECTANGLE, 3),
+    TRIANGULO_EQUILATERO(Messages.EQUILATERAL_TRIANGLE, 4),
+    TRIANGULO_ISOSCELES(Messages.ISOSCELES_ISOSCELES, 5);
 
     private final String name;
     private final int option;

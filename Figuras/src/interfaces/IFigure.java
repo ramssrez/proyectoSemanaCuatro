@@ -2,6 +2,6 @@ package interfaces;
 
 public interface IFigure {
     double calculatePerimeter();
-    double calculaterArea();
+    double calculateArea();
     String reedAttributes();
 }
