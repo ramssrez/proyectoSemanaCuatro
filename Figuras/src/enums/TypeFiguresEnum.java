@@ -2,7 +2,7 @@ package enums;
 
 import constants.Messages;
 
-public enum TipeFiguresEnum {
+public enum TypeFiguresEnum {
     CIRCULO(Messages.CIRCULO,1),
     CUADRADO(Messages.CUADRADO, 2),
     RECTANGULO(Messages.RECTANGULO, 3),
@@ -12,7 +12,7 @@ public enum TipeFiguresEnum {
     private final String name;
     private final int option;
 
-    TipeFiguresEnum(String nombre, int opcion) {
+    TypeFiguresEnum(String nombre, int opcion) {
         this.name = nombre;
         this.option = opcion;
     }
