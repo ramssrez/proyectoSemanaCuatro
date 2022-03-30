@@ -1,11 +1,12 @@
 package services;
 
-import domain.*;
+import constants.ValidateInputs;
 import enums.MenuOptionsEnum;
 import enums.TypeFiguresEnum;
 import interfaces.IFigure;
 import utils.Menus;
 
+import javax.swing.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -15,15 +16,16 @@ public class MenuService {
         IFigure figure = null;
         MenuOptionsEnum menuOptionsEnum;
         TypeFiguresEnum typeFiguresEnum;
-
+        ValidateInputs validateInputs = new ValidateInputs();
         StringBuilder stringBuilder = menus.menuOptions();
+        //JOptionPane.showInputDialog(stringBuilder.toString());
+
         boolean flag = false;
         while (!flag){
             System.out.println(stringBuilder.toString());
-            System.out.print("Opción: ");
             Scanner scanner = new Scanner(System.in);
             try {
-                int opcion = Integer.parseInt(scanner.nextLine());
+                int opcion = validateInputs.inputInteger("Ingresa una opción: ",scanner);
                 menuOptionsEnum = menus.getNameMenu(opcion);
                 switch (menuOptionsEnum){
                     case REGISTRAR:
@@ -34,12 +36,11 @@ public class MenuService {
                         break;
                     case SALIR:
                         System.out.println("Saliendo del programa");
+                        flag = true;
                         System.exit(0);
                 }
-            }catch (NullPointerException | NoSuchElementException e){
+            }catch (NoSuchElementException e){
                 System.err.println("No ha ingresado un valor correcto");
-            }catch (NumberFormatException e){
-                System.err.println("Ingresa un valor adecuado");
             }
 
         }
