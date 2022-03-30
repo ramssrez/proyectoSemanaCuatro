@@ -1,6 +1,9 @@
 package constants;
 
 public class Messages {
+    /**
+     * Option of figures
+     */
     public static final String CIRCLE = "Círculo";
     public static final String RECTANGLE = "Rectángulo";
     public static final String SQUARE = "Cuadrado";
@@ -13,8 +16,16 @@ public class Messages {
     public static final String EQUILATERAL_TRIANGLE_PROPERTIES = "Altura: %s [cm], Lado: %s [cm]";
     public static final String ISOSCELES_TRIANGLE_PROPERTIES = "Altura: %s [cm], Lado: %s [cm], Base: %s [cm]";
 
+    /**
+     * Menu of firts options
+     */
+    public static final String REGISTER_FIGURE = "Registrar un nuevo cálculo";
+    public static final String OPEN_FILE = "Abrir archivo con los cálculos";
+    public static final String GOOUT = "Salir del programa";
 
+
+    public static final String MENU_OPTION = "Ingresa una opción del menú:";
 
     public static final String FIGURE_OPTION = "Ingresa el número de la figura:";
-    public static final String FORMAT_OPTIONS_FIGURES = "\n%s - %s";
+    public static final String FORMAT_OPTIONS = "\n%s - %s";
 }
