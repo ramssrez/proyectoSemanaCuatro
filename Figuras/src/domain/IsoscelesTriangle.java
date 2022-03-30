@@ -36,4 +36,12 @@ public class IsoscelesTriangle extends Triangle {
         return String.format(Messages.ISOSCELES_TRIANGLE_PROPERTIES,this.height,this.side,this.base);
     }
 
+    @Override
+    public String toString() {
+        return "IsoscelesTriangle{" +
+                "height=" + height +
+                ", side=" + side +
+                ", base=" + base +
+                '}';
+    }
 }

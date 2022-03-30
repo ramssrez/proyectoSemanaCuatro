@@ -13,7 +13,7 @@ public class EquilateralTriangle extends Triangle {
 
     @Override
     public double calculateHeight() {
-        return (Math.sqrt(3) * side) / 2;
+        return (Math.sqrt(3) * this.side) / 2;
     }
 
     @Override
