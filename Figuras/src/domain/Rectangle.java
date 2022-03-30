@@ -23,8 +23,8 @@ public class Rectangle implements IFigure {
     }
 
     @Override
-    public String reedAttributes() {
-        return String.format(Messages.RECTANGLE_PROPERTIES,this.height,this.base);
+    public String readAttributes() {
+        return String.format(Messages.RECTANGLE_PROPERTIES,this.height,Messages.MEASUREMENT_UNITS,this.base,Messages.MEASUREMENT_UNITS);
     }
 
     @Override

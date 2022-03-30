@@ -32,8 +32,8 @@ public class IsoscelesTriangle extends Triangle {
     }
 
     @Override
-    public String reedAttributes() {
-        return String.format(Messages.ISOSCELES_TRIANGLE_PROPERTIES,this.height,this.side,this.base);
+    public String readAttributes() {
+        return String.format(Messages.ISOSCELES_TRIANGLE_PROPERTIES,this.height,Messages.MEASUREMENT_UNITS,this.side,Messages.MEASUREMENT_UNITS,this.base,Messages.MEASUREMENT_UNITS);
     }
 
     @Override

@@ -21,8 +21,8 @@ public class Square implements IFigure {
     }
 
     @Override
-    public String reedAttributes() {
-        return String.format(Messages.SQUARE_PROPERTIES,this.side);
+    public String readAttributes() {
+        return String.format(Messages.SQUARE_PROPERTIES,this.side,Messages.MEASUREMENT_UNITS);
     }
 
     @Override

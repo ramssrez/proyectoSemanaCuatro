@@ -27,8 +27,8 @@ public class EquilateralTriangle extends Triangle {
     }
 
     @Override
-    public String reedAttributes() {
-        return String.format(Messages.EQUILATERAL_TRIANGLE_PROPERTIES,this.height,this.side);
+    public String readAttributes() {
+        return String.format(Messages.EQUILATERAL_TRIANGLE_PROPERTIES,this.height,Messages.MEASUREMENT_UNITS ,this.side,Messages.MEASUREMENT_UNITS);
     }
 
     @Override

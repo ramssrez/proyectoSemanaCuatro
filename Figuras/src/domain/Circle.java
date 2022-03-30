@@ -21,8 +21,8 @@ public class Circle implements IFigure{
     }
 
     @Override
-    public String reedAttributes() {
-        return String.format(Messages.CIRCLE_PROPERTIES,this.radio);
+    public String readAttributes() {
+        return String.format(Messages.CIRCLE_PROPERTIES,this.radio,Messages.MEASUREMENT_UNITS);
     }
 
     @Override
