@@ -5,7 +5,7 @@ import constants.Messages;
 public enum MenuOptionsEnum {
     REGISTRAR(1,Messages.REGISTER_FIGURE),
     ABRIR(2,Messages.OPEN_FILE),
-    SALIR(3,Messages.GOOUT);
+    SALIR(3,Messages.GO_OUT);
     private final Integer option;
     private final String name;
 

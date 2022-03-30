@@ -17,11 +17,11 @@ public class Messages {
     public static final String ISOSCELES_TRIANGLE_PROPERTIES = "Altura: %s [cm], Lado: %s [cm], Base: %s [cm]";
 
     /**
-     * Menu of firts options
+     * Menu of first options
      */
     public static final String REGISTER_FIGURE = "Registrar un nuevo cálculo";
     public static final String OPEN_FILE = "Abrir archivo con los cálculos";
-    public static final String GOOUT = "Salir del programa";
+    public static final String GO_OUT = "Salir del programa";
 
 
     public static final String MENU_OPTION = "Ingresa una opción del menú:";

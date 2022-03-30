@@ -1,26 +1,15 @@
 package services;
 
-import constants.Messages;
-import enums.MenuOptionsEnum;
-import enums.TypeFiguresEnum;
-
-import javax.swing.*;
+import utils.Menus;
 
 public class MenuService {
     public static void menu() {
-        MenuOptionsEnum[] menuOptions = MenuOptionsEnum.values();
-        TypeFiguresEnum[] typeFiguresEnums;
-        StringBuilder stringBuilder = optionMenu(menuOptions);
+        Menus menus = new Menus();
+
+        StringBuilder stringBuilder = menus.menuOptions();
         System.out.println(stringBuilder.toString());
-        JOptionPane.showMessageDialog(null,stringBuilder);
+        stringBuilder = menus.figureOptions();
+        System.out.println(stringBuilder.toString());
     }
 
-    public static StringBuilder optionMenu(MenuOptionsEnum[] menuOptions) {
-        StringBuilder stringBuilder = new StringBuilder(Messages.MENU_OPTION);
-        for(MenuOptionsEnum f : menuOptions) {
-            stringBuilder.append(String.format(Messages.FORMAT_OPTIONS, f.getOption(),f.getName()));
-        }
-        return stringBuilder;
-    }
-    
 }
