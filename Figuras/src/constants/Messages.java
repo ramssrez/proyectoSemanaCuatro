@@ -10,6 +10,9 @@ public class Messages {
     public static final String CIRCLE_PROPERTIES = "Radio: %s [cm]";
     public static final String SQUARE_PROPERTIES = "Lado: %s [cm]";
     public static final String RECTANGLE_PROPERTIES = "Altura: %s [cm], Base: %s [cm]";
+    public static final String EQUILATERAL_TRIANGLE_PROPERTIES = "Altura: %s [cm], Lado: %s [cm]";
+    public static final String ISOSCELES_TRIANGLE_PROPERTIES = "Altura: %s [cm], Lado: %s [cm], Base: %s [cm]";
+
 
 
     public static final String FIGURE_OPTION = "Ingresa el número de la figura:";

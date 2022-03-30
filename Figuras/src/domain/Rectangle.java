@@ -1,5 +1,6 @@
 package domain;
 
+import constants.Messages;
 import interfaces.IFigure;
 
 public class Rectangle implements IFigure {
@@ -13,16 +14,24 @@ public class Rectangle implements IFigure {
 
     @Override
     public double calculatePerimeter() {
-        return 0;
+        return (2 * this.base) + (2 * this.height);
     }
 
     @Override
     public double calculateArea() {
-        return 0;
+        return this.base * this.height;
     }
 
     @Override
     public String reedAttributes() {
-        return null;
+        return String.format(Messages.RECTANGLE_PROPERTIES,this.height,this.base);
+    }
+
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "base=" + base +
+                ", height=" + height +
+                '}';
     }
 }

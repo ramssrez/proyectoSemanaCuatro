@@ -1,4 +1,8 @@
 package abstracts;
 
-public class Triangle {
+import interfaces.IFigure;
+
+public abstract class Triangle implements IFigure {
+    protected double height;
+    public abstract double calculateHeight();
 }
