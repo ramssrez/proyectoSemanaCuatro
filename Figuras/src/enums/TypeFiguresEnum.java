@@ -3,18 +3,18 @@ package enums;
 import constants.Messages;
 
 public enum TypeFiguresEnum {
-    CIRCULO(Messages.CIRCLE,1),
-    CUADRADO(Messages.SQUARE, 2),
-    RECTANGULO(Messages.RECTANGLE, 3),
-    TRIANGULO_EQUILATERO(Messages.EQUILATERAL_TRIANGLE, 4),
-    TRIANGULO_ISOSCELES(Messages.ISOSCELES_ISOSCELES, 5);
+    CIRCLE(Messages.CIRCLE,1),
+    SQUARE(Messages.SQUARE, 2),
+    RECTANGLE(Messages.RECTANGLE, 3),
+    EQUILATERAL_TRIANGLE(Messages.EQUILATERAL_TRIANGLE, 4),
+    ISOSCELES_ISOSCELES(Messages.ISOSCELES_ISOSCELES, 5);
 
     private final String name;
     private final int option;
 
-    TypeFiguresEnum(String nombre, int opcion) {
-        this.name = nombre;
-        this.option = opcion;
+    TypeFiguresEnum(String name, int option) {
+        this.name = name;
+        this.option = option;
     }
 
     public String getName() {
