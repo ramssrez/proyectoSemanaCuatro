@@ -16,6 +16,7 @@ public class Messages {
     public static final String EQUILATERAL_TRIANGLE_PROPERTIES = "Altura: %s %s, Lado: %s %s";
     public static final String ISOSCELES_TRIANGLE_PROPERTIES = "Altura: %s %s, Lado: %s %s, Base: %s %s";
     public static final String MEASUREMENT_UNITS = "[Unidades]";
+    public static final String MEASUREMENT_UNITS_SQUARE = "[Unidades Cuadradas]";
 
     /**
      * Menu of first options

@@ -4,37 +4,40 @@ import exepctions.ExeptionAplication;
 import java.util.Scanner;
 
 public class ValidateInputs {
+
     public ValidateInputs() {
     }
-    public double ValidateInputDouble(String argumento, Scanner scanner) throws ExeptionAplication {
-        double valor  = 0.0;
-        boolean bandera = false;
-        while (!bandera) {
+
+    public double validateInputDouble(String s, Scanner scanner) throws ExeptionAplication {
+        double value  = 0.0;
+        boolean flag = false;
+        while (!flag) {
             try {
-                System.out.print(argumento);
-                valor = Double.parseDouble(scanner.nextLine());
-                bandera = true;
+                System.out.print(s);
+                value = Double.parseDouble(scanner.nextLine());
+                flag = true;
             } catch (NumberFormatException |NullPointerException e) {
                 throw new ExeptionAplication(MessagesError.MESSAGE_INPUT_ERROR);
             }
             System.out.println(" ");
         }
-        return valor;
+        return value;
     }
-    public int inputInteger(String argumento, Scanner scanner) throws ExeptionAplication {
-        int valor = 0;
-        boolean bandera = false;
-        while (!bandera) {
+
+    public int inputInteger(String s, Scanner scanner) throws ExeptionAplication {
+        int value = 0;
+        boolean flag = false;
+        while (!flag) {
             System.out.println(" ");
             try {
-                System.out.print(argumento);
-                valor = Integer.parseInt(scanner.nextLine());
-                bandera = true;
+                System.out.print(s);
+                value = Integer.parseInt(scanner.nextLine());
+                flag = true;
             } catch (NumberFormatException |NullPointerException e) {
                 throw new ExeptionAplication(MessagesError.MESSAGE_INPUT_ERROR);
             }
             System.out.println(" ");
         }
-        return valor;
+        return value;
     }
 }
