@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -8,16 +9,27 @@ import java.util.List;
 
 public class Prueba {
     public static void main(String[] args) {
-        String fileName = "my-file.txt";
-        try{
-            List<String> lines = Arrays.asList("The first line", "The second line");
-            Path file = Paths.get(fileName);
-            System.out.println(file.toString());
-            Files.write(file, lines, StandardCharsets.UTF_8);
+        File nuevaCarpeta = new File("./Calculos");
+
+        if (!nuevaCarpeta.exists()) {
+            boolean carpetaCreada = nuevaCarpeta.mkdir();
+            System.out.println("carpetaCreada = " + carpetaCreada);
+
+            File crearArchivo = new File(nuevaCarpeta,"Hola Mundo.txt");
+            try {
+                crearArchivo.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Archivo creado = " + crearArchivo);
         }
-        catch (IOException e){
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+
+        File directorio = new File("./");
+
+        String[] archivos = directorio.list();
+
+        for(String archivo : archivos) {
+            System.out.println("archivo = " + archivo);
         }
     }
 }
