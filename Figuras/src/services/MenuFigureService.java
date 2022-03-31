@@ -3,12 +3,12 @@ package services;
 import constants.Messages;
 import constants.MessagesError;
 import constants.ValidateInputs;
-import domain.*;
 import enums.TypeFiguresEnum;
 import exepctions.ExeptionAplication;
 import interfaces.IFigure;
 import utils.Menus;
 
+import java.text.NumberFormat;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -50,10 +50,9 @@ public class MenuFigureService {
                         break;
                 }
                 if (figure != null){
-                    System.out.println(typeFiguresEnum.getName() + " " + figure.readAttributes() + " Perimetro: " + figure.calculatePerimeter() + " Area: " + figure.calculateArea());
+                    System.out.println(formatString(figure,typeFiguresEnum));
                     flag = true;
                 }
-
             }catch (NoSuchElementException e){
                 System.err.println(MessagesError.MESSAGE_INPUT_MENU);
             } catch (ExeptionAplication exeptionAplication) {
@@ -61,5 +60,13 @@ public class MenuFigureService {
             }
             System.out.println(" ");
         }
+    }
+
+    private String formatString(IFigure figure,TypeFiguresEnum typeFiguresEnum){
+        StringBuilder builder = new StringBuilder(typeFiguresEnum.getName());
+        builder.append(figure.readAttributes());
+        builder.append(String.format(Messages.PERIMETER,figure.calculatePerimeter(),Messages.MEASUREMENT_UNITS));
+        builder.append(String.format(Messages.AREA,figure.calculateArea(),Messages.MEASUREMENT_UNITS_SQUARE));
+        return builder.toString();
     }
 }
