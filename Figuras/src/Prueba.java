@@ -1,15 +1,27 @@
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDate;
 
 public class Prueba {
     public static void main(String[] args) {
         File nuevaCarpeta = new File("./Calculos");
+        LocalDate localDate = LocalDate.now();
+        System.out.println(localDate.toString());
+        String pathCarpet = "./Calculos/" + localDate.toString();
+        File carpetaNueva  = new File(pathCarpet);
+        String nombreArchivo = "Hola.txt";
+
+        if (!carpetaNueva.exists()){
+            boolean carpetaCreada = carpetaNueva.mkdir();
+            System.out.println("carpetaCreada = " + carpetaCreada);
+            File crearArchivo = new File(carpetaNueva,nombreArchivo);
+            try {
+                crearArchivo.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         if (!nuevaCarpeta.exists()) {
             boolean carpetaCreada = nuevaCarpeta.mkdir();
