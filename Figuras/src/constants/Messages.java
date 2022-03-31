@@ -10,12 +10,14 @@ public class Messages {
     public static final String EQUILATERAL_TRIANGLE = "Triángulo equilátero";
     public static final String ISOSCELES_TRIANGLE = "Triángulo isosceles";
 
-    public static final String CIRCLE_PROPERTIES = "Radio: %s %s";
-    public static final String SQUARE_PROPERTIES = "Lado: %s %s";
-    public static final String RECTANGLE_PROPERTIES = "Altura: %s %s, Base: %s %s";
-    public static final String EQUILATERAL_TRIANGLE_PROPERTIES = "Altura: %s %s, Lado: %s %s";
-    public static final String ISOSCELES_TRIANGLE_PROPERTIES = "Altura: %s %s, Lado: %s %s, Base: %s %s";
+    public static final String CIRCLE_PROPERTIES = ": Radio: %s %s,";
+    public static final String SQUARE_PROPERTIES = ": Lado: %s %s,";
+    public static final String RECTANGLE_PROPERTIES = ": Altura: %s %s, Base: %s %s,";
+    public static final String EQUILATERAL_TRIANGLE_PROPERTIES = ": Altura: %.2f %s, Lado: %s %s,";
+    public static final String ISOSCELES_TRIANGLE_PROPERTIES = ": Altura: %.2f %s, Lado: %s %s, Base: %s %s,";
     public static final String MEASUREMENT_UNITS = "[Unidades]";
+    public static final String PERIMETER = " Perimetro: %.2f %s,";
+    public static final String AREA = " Area: %.2f %s";
     public static final String MEASUREMENT_UNITS_SQUARE = "[Unidades Cuadradas]";
 
     /**
