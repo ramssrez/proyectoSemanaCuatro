@@ -19,10 +19,6 @@ public class MenuService {
         StringBuilder stringBuilder = menus.menuOptions();
         ValidateInputs validateInputs = new ValidateInputs();
 
-
-        IFigure figure = null;
-        TypeFiguresEnum typeFiguresEnum;
-
         boolean flag = false;
         while (!flag){
             System.out.println(stringBuilder.toString());
@@ -32,7 +28,9 @@ public class MenuService {
                 menuOptionsEnum = menus.getNameMenu(opcion);
                 switch (menuOptionsEnum){
                     case REGISTER:
-                        System.out.println("Selecciona una figura");
+                        //System.out.println("Selecciona una figura");
+                        MenuFigureService menuFigureService = new MenuFigureService();
+                        menuFigureService.menuFigures();
                         break;
                     case OPEN:
                         System.out.println("Selecciona un archivo");
