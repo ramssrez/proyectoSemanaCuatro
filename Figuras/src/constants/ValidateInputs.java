@@ -1,25 +1,23 @@
 package constants;
 
 import exepctions.ExeptionAplication;
-
-import javax.swing.*;
-import java.awt.*;
 import java.util.Scanner;
 
 public class ValidateInputs {
     public ValidateInputs() {
     }
-    public double ValidateInputDouble(String argumento){
+    public double ValidateInputDouble(String argumento, Scanner scanner) throws ExeptionAplication {
         double valor  = 0.0;
         boolean bandera = false;
         while (!bandera) {
             try {
-                //System.out.print(argumento);
-                valor = Double.parseDouble(argumento);
+                System.out.print(argumento);
+                valor = Double.parseDouble(scanner.nextLine());
                 bandera = true;
             } catch (NumberFormatException |NullPointerException e) {
-                System.err.println("No ha ingresado un valor correcto");
+                throw new ExeptionAplication(MessagesError.MESSAGE_INPUT_ERROR);
             }
+            System.out.println(" ");
         }
         return valor;
     }
@@ -33,7 +31,6 @@ public class ValidateInputs {
                 valor = Integer.parseInt(scanner.nextLine());
                 bandera = true;
             } catch (NumberFormatException |NullPointerException e) {
-                //System.err.println("No ha ingresado un valor correcto");
                 throw new ExeptionAplication(MessagesError.MESSAGE_INPUT_ERROR);
             }
             System.out.println(" ");

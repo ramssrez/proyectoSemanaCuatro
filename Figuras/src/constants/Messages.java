@@ -24,9 +24,13 @@ public class Messages {
     public static final String OPEN_FILE = "Abrir archivo con los cálculos";
     public static final String GO_OUT = "Salir del programa";
 
+    public static final String GO_OUT_APP = "Saliendo del programa";
+
 
 
     public static final String MENU_OPTION = "Ingresa una opción del menú:";
+    public static final String OPTION = "Opción: ";
+
 
     public static final String FIGURE_OPTION = "Ingresa el número de la figura:";
     public static final String FORMAT_OPTIONS = "\n%s - %s";

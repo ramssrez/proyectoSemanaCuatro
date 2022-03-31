@@ -1,5 +1,6 @@
 package services;
 
+import constants.Messages;
 import constants.MessagesError;
 import constants.ValidateInputs;
 import enums.MenuOptionsEnum;
@@ -14,29 +15,30 @@ import java.util.Scanner;
 public class MenuService {
     public static void menu() {
         Menus menus = new Menus();
-        IFigure figure = null;
         MenuOptionsEnum menuOptionsEnum;
-        TypeFiguresEnum typeFiguresEnum;
-        ValidateInputs validateInputs = new ValidateInputs();
         StringBuilder stringBuilder = menus.menuOptions();
-        //JOptionPane.showInputDialog(stringBuilder.toString());
+        ValidateInputs validateInputs = new ValidateInputs();
+
+
+        IFigure figure = null;
+        TypeFiguresEnum typeFiguresEnum;
 
         boolean flag = false;
         while (!flag){
             System.out.println(stringBuilder.toString());
             Scanner scanner = new Scanner(System.in);
             try {
-                int opcion = validateInputs.inputInteger("Ingresa una opción: ",scanner);
+                int opcion = validateInputs.inputInteger(Messages.OPTION,scanner);
                 menuOptionsEnum = menus.getNameMenu(opcion);
                 switch (menuOptionsEnum){
-                    case REGISTRAR:
+                    case REGISTER:
                         System.out.println("Selecciona una figura");
                         break;
-                    case ABRIR:
+                    case OPEN:
                         System.out.println("Selecciona un archivo");
                         break;
-                    case SALIR:
-                        System.out.println("Saliendo del programa");
+                    case GOOUT:
+                        System.out.println(Messages.GO_OUT_APP);
                         flag = true;
                         System.exit(0);
                 }

@@ -3,9 +3,9 @@ package enums;
 import constants.Messages;
 
 public enum MenuOptionsEnum {
-    REGISTRAR(1,Messages.REGISTER_FIGURE),
-    ABRIR(2,Messages.OPEN_FILE),
-    SALIR(3,Messages.GO_OUT);
+    REGISTER(1,Messages.REGISTER_FIGURE),
+    OPEN(2,Messages.OPEN_FILE),
+    GOOUT(3,Messages.GO_OUT);
 
     private final Integer option;
     private final String name;
