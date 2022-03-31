@@ -1,12 +1,13 @@
 package services;
 
+import constants.MessagesError;
 import constants.ValidateInputs;
 import enums.MenuOptionsEnum;
 import enums.TypeFiguresEnum;
+import exepctions.ExeptionAplication;
 import interfaces.IFigure;
 import utils.Menus;
 
-import javax.swing.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -40,9 +41,11 @@ public class MenuService {
                         System.exit(0);
                 }
             }catch (NoSuchElementException e){
-                System.err.println("No ha ingresado un valor correcto");
+                System.err.println(MessagesError.MESSAGE_INPUT_MENU);
+            } catch (ExeptionAplication exeptionAplication) {
+                System.err.println(exeptionAplication.getMessage());
             }
-
+            System.out.println(" ");
         }
 
 

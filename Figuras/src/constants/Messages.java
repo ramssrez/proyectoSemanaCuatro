@@ -25,6 +25,7 @@ public class Messages {
     public static final String GO_OUT = "Salir del programa";
 
 
+
     public static final String MENU_OPTION = "Ingresa una opción del menú:";
 
     public static final String FIGURE_OPTION = "Ingresa el número de la figura:";
