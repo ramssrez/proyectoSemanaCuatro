@@ -8,7 +8,7 @@ public class Messages {
     public static final String RECTANGLE = "Rectángulo";
     public static final String SQUARE = "Cuadrado";
     public static final String EQUILATERAL_TRIANGLE = "Triángulo equilátero";
-    public static final String ISOSCELES_ISOSCELES = "Triángulo isosceles";
+    public static final String ISOSCELES_TRIANGLE = "Triángulo isosceles";
 
     public static final String CIRCLE_PROPERTIES = "Radio: %s %s";
     public static final String SQUARE_PROPERTIES = "Lado: %s %s";
@@ -24,8 +24,12 @@ public class Messages {
     public static final String REGISTER_FIGURE = "Registrar un nuevo cálculo";
     public static final String OPEN_FILE = "Abrir archivo con los cálculos";
     public static final String GO_OUT = "Salir del programa";
-
     public static final String GO_OUT_APP = "Saliendo del programa";
+
+    public static final String IN_RADIO = "Ingresa el radio: ";
+    public static final String IN_SIDE = "Ingresa el lado: ";
+    public static final String IN_BASE = "Ingresa la base: ";
+    public static final String IN_HEIGHT = "Ingresa la altura: ";
 
 
 

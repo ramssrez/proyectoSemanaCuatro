@@ -7,7 +7,7 @@ public enum TypeFiguresEnum {
     SQUARE(Messages.SQUARE, 2),
     RECTANGLE(Messages.RECTANGLE, 3),
     EQUILATERAL_TRIANGLE(Messages.EQUILATERAL_TRIANGLE, 4),
-    ISOSCELES_ISOSCELES(Messages.ISOSCELES_ISOSCELES, 5);
+    ISOSCELES_TRIANGLE(Messages.ISOSCELES_TRIANGLE, 5);
 
     private final String name;
     private final int option;

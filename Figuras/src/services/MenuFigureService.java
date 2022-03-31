@@ -35,12 +35,12 @@ public class MenuFigureService {
                 typeFiguresEnum = menus.getNameFigure(opcion);
                 switch (typeFiguresEnum){
                     case CIRCLE:
-                        valueGeneral = validateInputs.validateInputDouble("Ingresa el radio: ",scanner);
-                        figure = new Circle(valueGeneral);
+                        //valueGeneral = validateInputs.validateInputDouble("Ingresa el radio: ",scanner);
+                        figure = createCircule(scanner,validateInputs);
                         break;
                     case SQUARE:
-                        valueGeneral = validateInputs.validateInputDouble("Ingresa el lado: " ,scanner);
-                        figure = new Square(valueGeneral);
+                        //valueGeneral = validateInputs.validateInputDouble("Ingresa el lado: " ,scanner);
+                        figure = createSquare(scanner,validateInputs);
                         break;
                     case RECTANGLE:
                         valueGeneral = validateInputs.validateInputDouble("Ingresa la base: " ,scanner);
@@ -51,7 +51,7 @@ public class MenuFigureService {
                         valueGeneral = validateInputs.validateInputDouble("Ingresa la base: " ,scanner);
                         figure = new EquilateralTriangle(valueGeneral);
                         break;
-                    case ISOSCELES_ISOSCELES:
+                    case ISOSCELES_TRIANGLE:
                         valueGeneral = validateInputs.validateInputDouble("Ingresa la base: ",scanner);
                         valueGeneralTwo = validateInputs.validateInputDouble("Ingresa el lado: " , scanner);
                         figure = new IsoscelesTriangle(valueGeneralTwo,valueGeneral);
@@ -71,7 +71,30 @@ public class MenuFigureService {
             System.out.println(" ");
         }
     }
-    private IFigure createCircule(double value){
-        return new Circle(value);
+    private IFigure createCircule(Scanner scanner, ValidateInputs validateInputs) throws ExeptionAplication {
+        double radio = validateInputs.validateInputDouble(Messages.IN_RADIO,scanner);
+        return new Circle(radio);
+    }
+
+    private IFigure createSquare(Scanner scanner, ValidateInputs validateInputs) throws ExeptionAplication {
+        double side = validateInputs.validateInputDouble(Messages.IN_SIDE ,scanner);
+        return new Square(side);
+    }
+
+    private IFigure createRectangle(Scanner scanner, ValidateInputs validateInputs) throws ExeptionAplication {
+        double base = validateInputs.validateInputDouble(Messages.IN_BASE ,scanner);
+        double height = validateInputs.validateInputDouble(Messages.IN_HEIGHT ,scanner);
+        return new Rectangle(base,height);
+    }
+
+    private IFigure createEquilateralTriangle(Scanner scanner, ValidateInputs validateInputs) throws ExeptionAplication {
+        double side = validateInputs.validateInputDouble(Messages.IN_SIDE ,scanner);
+        return new EquilateralTriangle(side);
+    }
+
+    private IFigure createIsoscelesTriangle(Scanner scanner, ValidateInputs validateInputs) throws ExeptionAplication {
+        double base = validateInputs.validateInputDouble(Messages.IN_BASE ,scanner);
+        double side = validateInputs.validateInputDouble(Messages.IN_SIDE ,scanner);
+        return new IsoscelesTriangle(side,base);
     }
 }
