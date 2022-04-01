@@ -1,4 +1,6 @@
 import constants.Messages;
+import constants.ValidateInputs;
+import exepctions.ExeptionAplication;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,94 +9,63 @@ import java.util.Scanner;
 
 public class Prueba {
     public static void main(String[] args) {
-        crearCarpeta();
-
+        crearCarpetaGeneral();
         LocalDate localDate = LocalDate.now();
-        System.out.println(localDate.toString());
-        String pathCarpet = Messages.PATH + localDate.toString();
-        File carpetaNueva  = new File(pathCarpet);
+        StringBuilder builder = new StringBuilder(Messages.PATH);
+        builder.append(localDate.toString());
+        //String pathCarpet = Messages.PATH + localDate.toString();
+
+        File fechaCarpeta  = new File(builder.toString());
+        //boolean mkdir = fechaCarpeta.mkdir();
+        if (fechaCarpeta.mkdir()) System.out.println("Carpeta " + localDate.toString() + " creada");
+        //System.out.println("mkdir = " + mkdir);
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingresa solo el nombre del archivo: ");
-        String nombre = scanner.nextLine() + Messages.TYPE;
-        if (!carpetaNueva.exists()){
-            boolean carpetaCreada = carpetaNueva.mkdir();
-            System.out.println("carpetaCreada = " + carpetaCreada);
-            File crearArchivo = new File(carpetaNueva,nombre);
+        ValidateInputs validateInputs = new ValidateInputs();
+
+        boolean bandera = false;
+        while (!bandera) {
+            String nombre = null;
             try {
-                crearArchivo.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+                nombre = validateInputs.inputString("Ingresa el nombre del archivo: ", scanner);
+                if (!fechaCarpeta.exists()){
+                    bandera = crearArchivo(nombre,fechaCarpeta);
+                }else if (fechaCarpeta.exists()){
+                    bandera = crearArchivo(nombre,fechaCarpeta);
+                }
+            } catch (ExeptionAplication e) {
+                System.err.println(e.getMessage());
+                //e.printStackTrace();
             }
-        }else if (carpetaNueva.exists()){
-            try {
-                File crearArchivo = new File(carpetaNueva,nombre);
-                crearArchivo.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }
-
-        /*
-        File nuevaCarpeta = new File(Messages.PATH);
-
-        LocalDate localDate = LocalDate.now();
-        System.out.println(localDate.toString());
-        String pathCarpet = Messages.PATH + localDate.toString();
-        File carpetaNueva  = new File(pathCarpet);
-        System.out.println(carpetaNueva.toString());
-        String nombreArchivo = "Hola.txt";
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingresa solo el nombre del archivo: ");
-        String nombre = scanner.nextLine() + Messages.TYPE;
-
-        if (!carpetaNueva.exists()){
-            boolean carpetaCreada = carpetaNueva.mkdir();
-            System.out.println("carpetaCreada = " + carpetaCreada);
-            File crearArchivo = new File(carpetaNueva,nombre);
-            try {
-                crearArchivo.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else if (carpetaNueva.exists()){
-            try {
-                File crearArchivo = new File(carpetaNueva,nombre);
-                crearArchivo.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-/*
-        if (!nuevaCarpeta.exists()) {
-            boolean carpetaCreada = nuevaCarpeta.mkdir();
-            System.out.println("carpetaCreada = " + carpetaCreada);
-
-            File crearArchivo = new File(nuevaCarpeta,"Hola Mundo.txt");
-            try {
-                crearArchivo.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("Archivo creado = " + crearArchivo);
-        }
-
-        File directorio = new File("./");
-
-        String[] archivos = directorio.list();
-
-        for(String archivo : archivos) {
-            System.out.println("archivo = " + archivo);
-        }
-*/
 
     }
 
-    public static void crearCarpeta() {
+    public static void crearCarpetaGeneral() {
         File carpetaNueva = new File(Messages.PATH);
         System.out.println(carpetaNueva.toString());
         boolean mkdir = carpetaNueva.mkdir();
-        System.out.println("mkdir = " + mkdir);
+    }
+    public static boolean crearArchivo(String nombre,File path){
+        boolean bandera = false;
+        try {
+            nombre = nombre + Messages.TYPE;
+            File crearArchivo = new File(path,nombre);
+            if (crearArchivo.exists()){
+                System.out.println("Este nombre ya existe, vuelve ingresar el nombre");
+            }else {
+                if(crearArchivo.createNewFile()){
+                    System.out.println("El archivo a sido creado en: " + crearArchivo.toString());
+                    bandera = true;
+                }else{
+                    System.out.println("Ocurrio un problema, no se ha creado el archivo, vuelve a ingresar el nombre");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("e = " + e.getMessage());
+            //bandera = false;
+        }
+        return bandera;
     }
 }
