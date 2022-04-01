@@ -4,8 +4,10 @@ import exepctions.ExeptionAplication;
 import java.util.Scanner;
 
 public class ValidateInputs {
+    private Scanner scanner;
 
     public ValidateInputs() {
+        this.scanner = new  Scanner(System.in);
     }
 
     public double validateInputDouble(String s, Scanner scanner) throws ExeptionAplication {
@@ -25,14 +27,14 @@ public class ValidateInputs {
         return value;
     }
 
-    public int inputInteger(String s, Scanner scanner) throws ExeptionAplication {
+    public int inputInteger(String s) throws ExeptionAplication {
         int value = 0;
         boolean flag = false;
         while (!flag) {
             System.out.println(" ");
             try {
                 System.out.print(s);
-                value = Integer.parseInt(scanner.nextLine());
+                value = Integer.parseInt(this.scanner.nextLine());
                 flag = true;
             } catch (NumberFormatException |NullPointerException e) {
                 throw new ExeptionAplication(MessagesError.MESSAGE_INPUT_ERROR);
@@ -41,13 +43,13 @@ public class ValidateInputs {
         }
         return value;
     }
-    public String inputString(String s, Scanner scanner) throws ExeptionAplication {
+    public String inputString(String s) throws ExeptionAplication {
         String string = null;
         boolean flag = false;
         while (!flag) {
             System.out.println(" ");
             System.out.print(s);
-            string = scanner.nextLine();
+            string = this.scanner.nextLine();
             if (string == null || string.isEmpty()){
                 throw  new ExeptionAplication(MessagesError.MESSAGE_EMPTY);
             }else {

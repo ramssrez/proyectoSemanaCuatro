@@ -7,10 +7,7 @@ import enums.TypeFiguresEnum;
 import exepctions.ExeptionAplication;
 import interfaces.IFigure;
 import utils.Menus;
-
-import java.text.NumberFormat;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class MenuFigureService {
 
@@ -28,9 +25,8 @@ public class MenuFigureService {
         boolean flag = false;
         while (!flag){
             System.out.println(stringBuilder.toString());
-            Scanner scanner = new Scanner(System.in);
             try {
-                int opcion = validateInputs.inputInteger(Messages.OPTION,scanner);
+                int opcion = validateInputs.inputInteger(Messages.OPTION);
                 typeFiguresEnum = menus.getNameFigure(opcion);
                 switch (typeFiguresEnum){
                     case CIRCLE:

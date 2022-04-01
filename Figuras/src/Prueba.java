@@ -5,7 +5,6 @@ import exepctions.ExeptionAplication;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Prueba {
     public static void main(String[] args) {
@@ -16,18 +15,15 @@ public class Prueba {
         //String pathCarpet = Messages.PATH + localDate.toString();
 
         File fechaCarpeta  = new File(builder.toString());
-        //boolean mkdir = fechaCarpeta.mkdir();
         if (fechaCarpeta.mkdir()) System.out.println("Carpeta " + localDate.toString() + " creada");
-        //System.out.println("mkdir = " + mkdir);
 
-        Scanner scanner = new Scanner(System.in);
         ValidateInputs validateInputs = new ValidateInputs();
 
         boolean bandera = false;
         while (!bandera) {
             String nombre = null;
             try {
-                nombre = validateInputs.inputString("Ingresa el nombre del archivo: ", scanner);
+                nombre = validateInputs.inputString("Ingresa el nombre del archivo: ");
                 if (!fechaCarpeta.exists()){
                     bandera = crearArchivo(nombre,fechaCarpeta);
                 }else if (fechaCarpeta.exists()){
