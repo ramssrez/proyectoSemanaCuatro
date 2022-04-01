@@ -34,7 +34,8 @@ public class Messages {
     public static final String IN_HEIGHT = "Ingresa la altura: ";
 
 
-
+    public static final String PATH = "./Calculos/";
+    public static final String TYPE = ".txt";
     public static final String MENU_OPTION = "Ingresa una opción del menú:";
     public static final String OPTION = "Opción: ";
 
