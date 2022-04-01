@@ -2,18 +2,15 @@ import constants.Messages;
 import constants.ValidateInputs;
 import exepctions.ExeptionAplication;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 
 public class Prueba {
     public static void main(String[] args) {
-        crearCarpetaGeneral();
+        createCarpetGeneral();
         LocalDate localDate = LocalDate.now();
         StringBuilder builder = new StringBuilder(Messages.PATH);
         builder.append(localDate.toString());
-        //String pathCarpet = Messages.PATH + localDate.toString();
-
         File fechaCarpeta  = new File(builder.toString());
         if (fechaCarpeta.mkdir()) System.out.println("Carpeta " + localDate.toString() + " creada");
 
@@ -38,30 +35,68 @@ public class Prueba {
 
     }
 
-    public static void crearCarpetaGeneral() {
-        File carpetaNueva = new File(Messages.PATH);
-        System.out.println(carpetaNueva.toString());
-        boolean mkdir = carpetaNueva.mkdir();
+    public static void createCarpetGeneral() {
+        File crearCarpet = new File(Messages.PATH);
+        if (crearCarpet.mkdir()) System.out.println("Se ha creado la carpeta Calculos");
     }
-    public static boolean crearArchivo(String nombre,File path){
+
+    public static boolean crearArchivo(String s,File path){
         boolean bandera = false;
         try {
-            nombre = nombre + Messages.TYPE;
-            File crearArchivo = new File(path,nombre);
-            if (crearArchivo.exists()){
-                System.out.println("Este nombre ya existe, vuelve ingresar el nombre");
+            StringBuilder builder = new StringBuilder(s);
+            builder.append(Messages.TYPE);
+            File file = new File(path,builder.toString());
+            if (file.exists()){
+                System.out.println("Este nombre ya existe, deseas escribir en el ");
+                System.out.println();
             }else {
-                if(crearArchivo.createNewFile()){
-                    System.out.println("El archivo a sido creado en: " + crearArchivo.toString());
+                if(file.createNewFile()){
+                    writeFile(builder.toString(),path, "Esto es una prueba");
+                    //System.out.println("El archivo a sido creado en: " + file.toString());
                     bandera = true;
-                }else{
-                    System.out.println("Ocurrio un problema, no se ha creado el archivo, vuelve a ingresar el nombre");
                 }
             }
         } catch (IOException e) {
-            System.out.println("e = " + e.getMessage());
-            //bandera = false;
+            System.out.println(e.getMessage());
         }
         return bandera;
     }
+
+    public static void createFile(String name, File path){
+        File file = new File(path,name);
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            writer.close();
+            System.out.println("Se ha creado el archivo");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    public static void writeFile(String name, File path, String content){
+        File file = new File(path,name);
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            writer.println(content);
+            writer.close();
+            System.out.println("Se ha escrito el archivo");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+
+    public static void updateFile(String name, File path, String content){
+        File file = new File(path,name);
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(file,true));
+            writer.println(content);
+            writer.close();
+            System.out.println("Se ha escrito el archivo");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace(System.out);
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
+    // static void
 }
