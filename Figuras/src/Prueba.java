@@ -15,20 +15,20 @@ public class Prueba {
         if (fechaCarpeta.mkdir()) System.out.println("Carpeta " + localDate.toString() + " creada");
 
         ValidateInputs validateInputs = new ValidateInputs();
+        String pruebas = "Circulo sdfjsldfjlsdf";
 
         boolean bandera = false;
         while (!bandera) {
-            String nombre = null;
+            String nombre;
             try {
                 nombre = validateInputs.inputString("Ingresa el nombre del archivo: ");
                 if (!fechaCarpeta.exists()){
-                    bandera = crearArchivo(nombre,fechaCarpeta);
+                    bandera = crearArchivo(nombre,fechaCarpeta,pruebas);
                 }else if (fechaCarpeta.exists()){
-                    bandera = crearArchivo(nombre,fechaCarpeta);
+                    bandera = crearArchivo(nombre,fechaCarpeta,pruebas);
                 }
             } catch (ExeptionAplication e) {
                 System.err.println(e.getMessage());
-                //e.printStackTrace();
             }
 
         }
@@ -40,23 +40,31 @@ public class Prueba {
         if (crearCarpet.mkdir()) System.out.println("Se ha creado la carpeta Calculos");
     }
 
-    public static boolean crearArchivo(String s,File path){
+    public static boolean crearArchivo(String name,File path, String promp){
         boolean bandera = false;
+        ValidateInputs validateInputs = new ValidateInputs();
         try {
-            StringBuilder builder = new StringBuilder(s);
+            StringBuilder builder = new StringBuilder(name);
             builder.append(Messages.TYPE);
             File file = new File(path,builder.toString());
             if (file.exists()){
-                System.out.println("Este nombre ya existe, deseas escribir en el ");
-                System.out.println();
+                System.out.println("Este nombre ya existe, deseas escribir en el \n 1.-Si \n 2.-No");
+                int valor = validateInputs.inputInteger("Ingresa el valor: ");
+                if(valor == 1){
+                    updateFile(builder.toString(),path,promp);
+                    System.out.println("Se ha actualizado el archivo " + builder.toString());
+                    bandera = true;
+                }else{
+                    System.out.println("Retornando.....");
+                }
             }else {
                 if(file.createNewFile()){
-                    writeFile(builder.toString(),path, "Esto es una prueba");
-                    //System.out.println("El archivo a sido creado en: " + file.toString());
+                    writeFile(builder.toString(),path, promp);
+                    System.out.println("El archivo a sido creado en: " + file.toString());
                     bandera = true;
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | ExeptionAplication e) {
             System.out.println(e.getMessage());
         }
         return bandera;
@@ -79,7 +87,7 @@ public class Prueba {
             PrintWriter writer = new PrintWriter(file);
             writer.println(content);
             writer.close();
-            System.out.println("Se ha escrito el archivo");
+            //System.out.println("Se ha escrito el archivo");
         } catch (FileNotFoundException e) {
             e.printStackTrace(System.out);
         }
@@ -91,12 +99,10 @@ public class Prueba {
             PrintWriter writer = new PrintWriter(new FileWriter(file,true));
             writer.println(content);
             writer.close();
-            System.out.println("Se ha escrito el archivo");
         } catch (FileNotFoundException e) {
             e.printStackTrace(System.out);
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
     }
-    // static void
 }

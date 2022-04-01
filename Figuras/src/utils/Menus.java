@@ -49,14 +49,14 @@ public class Menus {
     }
 
     public MenuOptionsEnum getNameMenu(int option){
-        return Stream.of(menuOptionsEnums)
+        return Stream.of(this.menuOptionsEnums)
                 .filter(f->f.getOption() == option)
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
 
     public TypeFiguresEnum getNameFigure(int option){
-        return Stream.of(typeFiguresEnums)
+        return Stream.of(this.typeFiguresEnums)
                 .filter(f->f.getOption() == option)
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
