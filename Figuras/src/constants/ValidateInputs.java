@@ -4,20 +4,19 @@ import exepctions.ExeptionAplication;
 import java.util.Scanner;
 
 public class ValidateInputs {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public ValidateInputs() {
         this.scanner = new  Scanner(System.in);
     }
 
-    public double validateInputDouble(String s, Scanner scanner) throws ExeptionAplication {
+    public double validateInputDouble(String s) throws ExeptionAplication {
         double value  = 0.0;
         boolean flag = false;
         while (!flag) {
-            System.out.println(" ");
             try {
                 System.out.print(s);
-                value = Double.parseDouble(scanner.nextLine());
+                value = Double.parseDouble(this.scanner.nextLine());
                 flag = true;
             } catch (NumberFormatException |NullPointerException e) {
                 throw new ExeptionAplication(MessagesError.MESSAGE_INPUT_ERROR);
@@ -31,7 +30,6 @@ public class ValidateInputs {
         int value = 0;
         boolean flag = false;
         while (!flag) {
-            System.out.println(" ");
             try {
                 System.out.print(s);
                 value = Integer.parseInt(this.scanner.nextLine());
