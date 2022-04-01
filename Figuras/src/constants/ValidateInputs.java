@@ -12,6 +12,7 @@ public class ValidateInputs {
         double value  = 0.0;
         boolean flag = false;
         while (!flag) {
+            System.out.println(" ");
             try {
                 System.out.print(s);
                 value = Double.parseDouble(scanner.nextLine());
@@ -39,5 +40,21 @@ public class ValidateInputs {
             System.out.println(" ");
         }
         return value;
+    }
+    public String inputString(String s, Scanner scanner) throws ExeptionAplication {
+        String string = null;
+        boolean flag = false;
+        while (!flag) {
+            System.out.println(" ");
+            System.out.print(s);
+            string = scanner.nextLine();
+            if (string == null || string.isEmpty()){
+                throw  new ExeptionAplication(MessagesError.MESSAGE_EMPTY);
+            }else {
+                flag = true;
+            }
+            System.out.println(" ");
+        }
+        return string;
     }
 }
