@@ -47,6 +47,7 @@ public class MenuFigureService {
                 }
                 if (figure != null){
                     System.out.println(formatString(figure,typeFiguresEnum));
+                    ManageFilesService.creteDir(formatString(figure,typeFiguresEnum));
                     flag = true;
                 }
             }catch (NoSuchElementException e){
