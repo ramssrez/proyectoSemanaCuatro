@@ -7,7 +7,7 @@ import exepctions.ExeptionAplication;
 import java.io.*;
 import java.time.LocalDate;
 
-public class ManageFilesService {
+public class ManageFilesService extends Thread{
 
     public ManageFilesService() {
     }
@@ -51,7 +51,11 @@ public class ManageFilesService {
             builder.append(Messages.TYPE);
             File file = new File(path,builder.toString());
             if (file.exists()){
-                System.out.println(Messages.OPTIONS_UPDATE);
+                updateFile(builder.toString(),path,promp);
+                System.out.println(String.format(Messages.FILE_UPDATE,builder.toString()));
+                bandera = true;
+                /*
+                                System.out.println(Messages.OPTIONS_UPDATE);
                 int valor = validateInputs.inputInteger(Messages.OPTION);
                 if(valor == 1){
                     updateFile(builder.toString(),path,promp);
@@ -60,6 +64,8 @@ public class ManageFilesService {
                 }else{
                     System.out.println(Messages.RETURN);
                 }
+                 */
+
             }else {
                 if(file.createNewFile()){
                     writeFile(builder.toString(),path, promp);
@@ -67,7 +73,7 @@ public class ManageFilesService {
                     bandera = true;
                 }
             }
-        } catch (IOException | ExeptionAplication e) {
+        } catch (IOException  e) {
             System.out.println(e.getMessage());
         }
         return bandera;
@@ -95,5 +101,10 @@ public class ManageFilesService {
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
+    }
+
+    @Override
+    public void run() {
+        super.run();
     }
 }
