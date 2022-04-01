@@ -9,7 +9,10 @@ import java.time.LocalDate;
 
 public class ManageFilesService {
 
-    public static void creteDir(String datesFigure) {
+    public ManageFilesService() {
+    }
+
+    public void creteDir(String datesFigure) {
         createCarpetGeneral();
         LocalDate localDate = LocalDate.now();
         StringBuilder builder = new StringBuilder(Messages.PATH);
@@ -25,9 +28,9 @@ public class ManageFilesService {
             try {
                 nombre = validateInputs.inputString(Messages.NAME_FILE);
                 if (!dateDir.exists()){
-                    bandera = crearArchivo(nombre,dateDir,datesFigure);
+                    bandera = createFile(nombre,dateDir,datesFigure);
                 }else if (dateDir.exists()){
-                    bandera = crearArchivo(nombre,dateDir,datesFigure);
+                    bandera = createFile(nombre,dateDir,datesFigure);
                 }
             } catch (ExeptionAplication e) {
                 System.err.println(e.getMessage());
@@ -35,12 +38,12 @@ public class ManageFilesService {
         }
     }
 
-    public static void createCarpetGeneral() {
+    private void createCarpetGeneral() {
         File crearCarpet = new File(Messages.PATH);
         if (crearCarpet.mkdir()) System.out.println(String.format(Messages.NAME_DATE_DIR,Messages.PATH));
     }
 
-    public static boolean crearArchivo(String name,File path, String promp){
+    private boolean createFile(String name, File path, String promp){
         boolean bandera = false;
         ValidateInputs validateInputs = new ValidateInputs();
         try {
@@ -70,19 +73,18 @@ public class ManageFilesService {
         return bandera;
     }
 
-    public static void writeFile(String name, File path, String content){
+    private void writeFile(String name, File path, String content){
         File file = new File(path,name);
         try {
             PrintWriter writer = new PrintWriter(file);
             writer.println(content);
             writer.close();
-            //System.out.println("Se ha escrito el archivo");
         } catch (FileNotFoundException e) {
             e.printStackTrace(System.out);
         }
     }
 
-    public static void updateFile(String name, File path, String content){
+    private void updateFile(String name, File path, String content){
         File file = new File(path,name);
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(file,true));
