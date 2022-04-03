@@ -2,10 +2,12 @@ package services;
 
 import constants.Messages;
 import domain.Dir;
+import domain.FileDocument;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ManageFilesService{
 
@@ -43,7 +45,6 @@ public class ManageFilesService{
                 if(file.createNewFile()){
                     writeFile(builder.toString(),path, promp);
                     System.out.println(String.format(Messages.PATH_FILE,file.toString()));
-                    //bandera = true;
                 }
             }
         } catch (IOException  e) {
@@ -89,18 +90,31 @@ public class ManageFilesService{
         return dirList;
     }
 
-    public List<Dir> showDir(String s){
+    public List<FileDocument> showFile(String s){
         File file = new File(Messages.PATH + s);
         String [] list =file.list();
-        List<Dir> dirList = new ArrayList<>();
+        List<FileDocument> fileList = new ArrayList<>();
         try {
             for (int i = 0; i<list.length;i++){
-                Dir prueba = new Dir((i+1),list[i]);
-                dirList.add(prueba);
+                FileDocument  fileDocument= new FileDocument((i+1),list[i]);
+                fileList.add(fileDocument);
             }
         }catch (NullPointerException e){
             System.err.println("");
         }
-        return dirList;
+        return fileList;
+    }
+    public void openFile(String dateDir, String nameFile){
+        try {
+            InputStream ins = new FileInputStream(Messages.PATH+dateDir+"/"+nameFile);
+            Scanner scanner = new Scanner(ins);
+            while (scanner.hasNextLine())
+                System.out.println(scanner.nextLine());
+            ins.close();
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

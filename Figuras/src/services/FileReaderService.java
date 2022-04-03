@@ -4,8 +4,8 @@ import constants.Messages;
 import constants.MessagesError;
 import constants.ValidateInputs;
 import domain.Dir;
+import domain.FileDocument;
 import exepctions.ExeptionAplication;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -37,13 +37,15 @@ public class FileReaderService {
 
     public void openFiles(int opcion) throws ExeptionAplication {
         this.dir = getDir(opcion);
-        List<Dir> list = filesService.showDir(dir.getName());
+        List<FileDocument> list = filesService.showFile(dir.getName());
         if (list.isEmpty()) throw new ExeptionAplication(MessagesError.MESSAGE_EMPTY_FILES);
         if (!list.isEmpty()){
-            printList(list);
+            printListFile(list);
             try {
                 int opcionFile = validateInputs.inputInteger(Messages.OPTION);
-                System.out.println("opcionFile = " + opcionFile);;
+                FileDocument fileDocument = getDir(opcionFile,list);
+                Thread thread = new Thread(new ThreadFileService(dir.getName(),fileDocument.getName()));
+                thread.start();
             }catch (ExeptionAplication e) {
                 System.err.println(e.getMessage());;
             }
@@ -58,16 +60,23 @@ public class FileReaderService {
         System.out.println(stringBuilder.toString());
     }
 
-    public void printList(List <Dir> list) {
+    public void printListFile(List <FileDocument> list) {
         this.stringBuilder = new StringBuilder(Messages.OPTION_DIR);
-        for (Dir dir: list) {
-            this.stringBuilder.append(String.format(Messages.FORMAT_OPTIONS,dir.getOption(),dir.getName()));
+        for (FileDocument fileDocument: list) {
+            this.stringBuilder.append(String.format(Messages.FORMAT_OPTIONS,fileDocument.getOption(),fileDocument.getName()));
         }
         System.out.println(stringBuilder.toString());
     }
 
     public Dir getDir(int option){
         return listDir
+                .stream()
+                .filter(f-> f.getOption() == option)
+                .findFirst()
+                .orElseThrow(NoSuchElementException::new);
+    }
+    public FileDocument getDir(int option, List<FileDocument> list){
+        return list
                 .stream()
                 .filter(f-> f.getOption() == option)
                 .findFirst()
