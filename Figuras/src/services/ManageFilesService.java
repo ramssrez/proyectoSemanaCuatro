@@ -1,9 +1,13 @@
 package services;
 
 import constants.Messages;
+import enums.Prueba;
+
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ManageFilesService{
 
@@ -72,12 +76,18 @@ public class ManageFilesService{
             e.printStackTrace(System.out);
         }
     }
-    public void showDir(){
-        File file = new File(Messages.PATH);
+    public List<Prueba> showDir(){
+        File file = new File(Messages.PATH+"2022-04-03");
         String [] list =file.list();
         Arrays.sort(list);
+        List<Prueba> pruebas = new ArrayList<>();
+       // List<String> stringList = new ArrayList(Arrays.stream());
+                //Arrays.stream(list);
         for (int i = 0; i<list.length;i++){
-            System.out.println(list[i]);
+            Prueba prueba = new Prueba((i+1),list[i]);
+            pruebas.add(prueba);
+            //System.out.println(prueba.toString());
         }
+        return pruebas;
     }
 }
