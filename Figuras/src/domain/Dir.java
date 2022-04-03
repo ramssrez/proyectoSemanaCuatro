@@ -1,10 +1,10 @@
-package enums;
+package domain;
 
-public class Prueba {
+public class Dir {
     private Integer option;
     private String name;
 
-    public Prueba(Integer option, String name) {
+    public Dir(Integer option, String name) {
         this.option = option;
         this.name = name;
     }
@@ -16,5 +16,13 @@ public class Prueba {
         sb.append(", name='").append(name).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    public Integer getOption() {
+        return option;
+    }
+
+    public String getName() {
+        return name;
     }
 }
