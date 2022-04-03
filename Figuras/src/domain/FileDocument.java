@@ -20,7 +20,6 @@ public class FileDocument {
         sb.append('}');
         return sb.toString();
     }
-
     public String getName() {
         return name;
     }

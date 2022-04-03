@@ -1,0 +1,5 @@
+Círculo: Radio: 2.0 [Unidades], Perimetro: 12.57 [Unidades], Area: 12.57 [Unidades Cuadradas]
+Cuadrado: Lado: 6.0 [Unidades], Perimetro: 24.00 [Unidades], Area: 36.00 [Unidades Cuadradas]
+Triángulo isosceles: Altura: 0.00 [Unidades], Lado: 2.0 [Unidades], Base: 4.0 [Unidades], Perimetro: 8.00 [Unidades], Area: 0.00 [Unidades Cuadradas]
+Cuadrado: Lado: 2.0 [Unidades], Perimetro: 8.00 [Unidades], Area: 4.00 [Unidades Cuadradas]
+Cuadrado: Lado: 5.0 [Unidades], Perimetro: 20.00 [Unidades], Area: 25.00 [Unidades Cuadradas]
