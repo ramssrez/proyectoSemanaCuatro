@@ -1,12 +1,10 @@
 package services;
 
 import constants.Messages;
-import enums.Prueba;
-
+import domain.Dir;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ManageFilesService{
@@ -60,7 +58,7 @@ public class ManageFilesService{
             writer.println(content);
             writer.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace(System.out);
+            System.err.println(e.getMessage());
         }
     }
 
@@ -71,23 +69,23 @@ public class ManageFilesService{
             writer.println(content);
             writer.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace(System.out);
+            System.err.println(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace(System.out);
+            System.err.println(e.getMessage());
         }
     }
-    public List<Prueba> showDir(){
-        File file = new File(Messages.PATH+"2022-04-03");
+    public List<Dir> showDir(){
+        File file = new File(Messages.PATH);
         String [] list =file.list();
-        Arrays.sort(list);
-        List<Prueba> pruebas = new ArrayList<>();
-       // List<String> stringList = new ArrayList(Arrays.stream());
-                //Arrays.stream(list);
-        for (int i = 0; i<list.length;i++){
-            Prueba prueba = new Prueba((i+1),list[i]);
-            pruebas.add(prueba);
-            //System.out.println(prueba.toString());
+        List<Dir> dirList = new ArrayList<>();
+        try {
+            for (int i = 0; i<list.length;i++){
+                Dir prueba = new Dir((i+1),list[i]);
+                dirList.add(prueba);
+            }
+        }catch (NullPointerException e){
+            System.err.println("");
         }
-        return pruebas;
+        return dirList;
     }
 }
