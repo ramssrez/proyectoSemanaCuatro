@@ -23,12 +23,13 @@ public class MenuService {
                 menuOptionsEnum = menus.getNameMenu(opcion);
                 switch (menuOptionsEnum){
                     case REGISTER:
-                        //System.out.println("Selecciona una figura");
                         MenuFigureService menuFigureService = new MenuFigureService();
                         menuFigureService.menuFigures();
                         break;
                     case OPEN:
-                        System.out.println("Selecciona un archivo");
+                        System.out.println("Directorios de la carpeta calculos");
+                        ManageFilesService filesService = new ManageFilesService();
+                        filesService.showDir();
                         break;
                     case GOOUT:
                         System.out.println(Messages.GO_OUT_APP);

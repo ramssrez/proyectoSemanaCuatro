@@ -3,6 +3,7 @@ package services;
 import constants.Messages;
 import java.io.*;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class ManageFilesService{
 
@@ -69,6 +70,14 @@ public class ManageFilesService{
             e.printStackTrace(System.out);
         } catch (IOException e) {
             e.printStackTrace(System.out);
+        }
+    }
+    public void showDir(){
+        File file = new File(Messages.PATH);
+        String [] list =file.list();
+        Arrays.sort(list);
+        for (int i = 0; i<list.length;i++){
+            System.out.println(list[i]);
         }
     }
 }
