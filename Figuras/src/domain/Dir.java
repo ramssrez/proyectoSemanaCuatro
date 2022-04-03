@@ -1,10 +1,10 @@
 package domain;
 
 public class Dir {
-    private Integer option;
+    private int option;
     private String name;
 
-    public Dir(Integer option, String name) {
+    public Dir(int option, String name) {
         this.option = option;
         this.name = name;
     }
@@ -18,7 +18,7 @@ public class Dir {
         return sb.toString();
     }
 
-    public Integer getOption() {
+    public int getOption() {
         return option;
     }
 
