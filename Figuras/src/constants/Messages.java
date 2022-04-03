@@ -38,6 +38,7 @@ public class Messages {
     public static final String TYPE = ".txt";
     public static final String MENU_OPTION = "Ingresa una opción del menú:";
     public static final String OPTION = "Opción: ";
+    public static final String OPTION_DIR = "Selecciona una opción:";
 
     public static final String NAME_FILE = "Ingresa el nombre del archivo: ";
     public static final String NAME_DATE_DIR = "Carpeta %s creada";

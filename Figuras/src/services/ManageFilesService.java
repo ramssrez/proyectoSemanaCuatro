@@ -88,4 +88,19 @@ public class ManageFilesService{
         }
         return dirList;
     }
+
+    public List<Dir> showDir(String s){
+        File file = new File(Messages.PATH + s);
+        String [] list =file.list();
+        List<Dir> dirList = new ArrayList<>();
+        try {
+            for (int i = 0; i<list.length;i++){
+                Dir prueba = new Dir((i+1),list[i]);
+                dirList.add(prueba);
+            }
+        }catch (NullPointerException e){
+            System.err.println("");
+        }
+        return dirList;
+    }
 }

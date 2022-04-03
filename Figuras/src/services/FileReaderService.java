@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 
 public class FileReaderService {
     private Dir dir;
-    private List<Dir> listDir = new ArrayList<>();
+    private List<Dir> listDir;
     private ValidateInputs validateInputs;
     private StringBuilder stringBuilder;
     private ManageFilesService filesService;
@@ -23,23 +23,44 @@ public class FileReaderService {
         if (listDir.isEmpty()) throw new  ExeptionAplication(MessagesError.MESSAGE_EMPTY_DIR);
     }
 
-    public void openFiles() {
+    public void openDirs() {
         printList();
         if (!listDir.isEmpty()){
-            int opcion = 0;
             try {
-                opcion = validateInputs.inputInteger(Messages.OPTION);
-                this.dir = getDir(opcion);
+                int opcion = validateInputs.inputInteger(Messages.OPTION);
+                openFiles(opcion);
             } catch (ExeptionAplication e) {
                 System.err.println(e.getMessage());;
             }
-            System.out.println(dir.getOption() + " " + dir.getName());
         }
     }
 
-    public void printList()  {
-        this.stringBuilder = new StringBuilder("Directorios de la carpeta calculos");
+    public void openFiles(int opcion) throws ExeptionAplication {
+        this.dir = getDir(opcion);
+        List<Dir> list = filesService.showDir(dir.getName());
+        if (list.isEmpty()) throw new ExeptionAplication(MessagesError.MESSAGE_EMPTY_FILES);
+        if (!list.isEmpty()){
+            printList(list);
+            try {
+                int opcionFile = validateInputs.inputInteger(Messages.OPTION);
+                System.out.println("opcionFile = " + opcionFile);;
+            }catch (ExeptionAplication e) {
+                System.err.println(e.getMessage());;
+            }
+        }
+    }
+
+    public void printList() {
+        this.stringBuilder = new StringBuilder(Messages.OPTION_DIR);
         for (Dir dir: listDir) {
+            this.stringBuilder.append(String.format(Messages.FORMAT_OPTIONS,dir.getOption(),dir.getName()));
+        }
+        System.out.println(stringBuilder.toString());
+    }
+
+    public void printList(List <Dir> list) {
+        this.stringBuilder = new StringBuilder(Messages.OPTION_DIR);
+        for (Dir dir: list) {
             this.stringBuilder.append(String.format(Messages.FORMAT_OPTIONS,dir.getOption(),dir.getName()));
         }
         System.out.println(stringBuilder.toString());

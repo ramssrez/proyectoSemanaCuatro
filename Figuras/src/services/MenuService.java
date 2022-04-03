@@ -28,7 +28,7 @@ public class MenuService {
                         break;
                     case OPEN:
                         FileReaderService fileReaderService = new FileReaderService();
-                        fileReaderService.openFiles();
+                        fileReaderService.openDirs();
                         break;
                     case GOOUT:
                         System.out.println(Messages.GO_OUT_APP);
