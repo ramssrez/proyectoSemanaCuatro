@@ -41,9 +41,7 @@ public class Messages {
 
     public static final String NAME_FILE = "Ingresa el nombre del archivo: ";
     public static final String NAME_DATE_DIR = "Carpeta %s creada";
-    public static final String OPTIONS_UPDATE = "El archivo ya existe, deseas sobreescribirlo? \n 1.-Si \n 2.-No";
     public static final String FILE_UPDATE = "Se ha actualizado el archivo: %s";
-    public static final String RETURN = "Retornando.....";
     public static final String PATH_FILE = "El archivo ha sido creado en la siguiente ruta: %s";
 
     public static final String FIGURE_OPTION = "Ingresa el número de la figura:";
